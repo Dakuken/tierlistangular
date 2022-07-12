@@ -1,0 +1,12 @@
+<form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+    <nb-card>
+        <nb-card-body class="example-items-col" style="align-items: center; display: flex; flex-direction: column;">
+            <input type="text" nbInput status="primary" placeholder="Nom" formControlName="lastName">
+            <input type="text" nbInput status="info" placeholder="Prenom" formControlName="firstName">
+            <input type="text" nbInput status="success" placeholder="email" formControlName="email">
+            <input type="password" nbInput status="warning" placeholder="password" formControlName="password">
+            <p style="color : #db2c66">{{errorMessage}}</p>
+        </nb-card-body>
+        <button nbButton status="success" type="submit" [disabled]="signUpForm.invalid">Success</button>
+    </nb-card>
+</form>

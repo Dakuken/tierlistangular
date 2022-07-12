@@ -1,0 +1,17 @@
+<!-- <button outline nbButton [nbContextMenu]="items">
+    Menu
+</button> -->
+<div class="grid">
+    <div class="colored-column-warning">
+        <button *ngIf="this.isAuth" nbButton outline status="info" (click)="goTo('/home')">Home</button>
+        <button *ngIf="this.isAuth" nbButton outline status="info" (click)="goTo('/tierlist')">Tierlist</button>
+    </div>
+
+    <div>
+        <button *ngIf="!this.isAuth" nbButton outline status="success" class="right" (click)="goTo('/auth/signin')">Sign In</button>
+        <button *ngIf=" !this.isAuth" nbButton outline status="success" class="right" (click)="goTo('/auth/signup')">Sign up</button>
+        <button *ngIf=" this.isAuth" nbButton outline status="danger" style="opacity : 0.9" class="right" (click)="onSignOut()">Log out</button>
+    </div>
+</div>
+
+<!-- <button nbButton outline status="primary">Tier</button> -->
