@@ -52,4 +52,8 @@ export class TierlistComponent implements OnInit {
     console.log(this.profs);
 
   }
+
+  wichPic(name: string) {
+    return `../../assets/PhotoProfs/${name.split('.').join('')}.jpg`;
+  }
 }
