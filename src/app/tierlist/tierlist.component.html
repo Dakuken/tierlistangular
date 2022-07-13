@@ -1,9 +1,11 @@
+<p>1</p>
 <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let prof of profs" cdkDrag>
-        <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-        <!-- <div> <img class="profil" src="../../assets/PhotoProf/AILLERIE.jpg" alt=""></div> -->
-        <nb-user size="large" [name]="prof.name" [picture]="wichPic(prof.name)"></nb-user>
-        <!-- <p>{{prof.name}}</p> -->
+    <div class="example-box" *ngFor="let prof of profs; let i = index" cdkDrag>
+        <div class="example-custom-placeholder" *cdkDragPlaceholder> tu la pose ici ?</div>
+        <div id="prof">
+            <nb-user size="giant" [name]="''" [picture]="wichPic(prof.name)"></nb-user>
+            <p>{{prof.name}}</p>
+        </div>
     </div>
 </div>
 <button (click)="test()">heheha</button>
