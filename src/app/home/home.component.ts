@@ -1,5 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { NbDialogService } from '@nebular/theme';
+import { User } from '../models/User.model';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +10,13 @@ import { NbDialogService } from '@nebular/theme';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private dialogService: NbDialogService) { }
+  email: string = ''
+  constructor(private dialogService: NbDialogService) {
 
-  ngOnInit() { }
+  }
+
+  ngOnInit() {
+  }
 
   openDialog(dialog: TemplateRef<any>) {
     this.dialogService.open(dialog);

@@ -63,7 +63,7 @@ export class AuthService {
               resolve();
             },
             (error: Error) => {
-              reject
+              reject(error)
             }
           )
       }
