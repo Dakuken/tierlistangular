@@ -43,9 +43,12 @@ export class HeaderComponent implements OnInit {
   }
 
   goTo(chemin: string) {
-    console.log(chemin);
-
     this.router.navigate([chemin])
+  }
+
+  onViewTierlistPerso() {
+    const auth = getAuth();
+    this.router.navigate(['/tierlist', auth.currentUser?.email])
   }
 
 }

@@ -18,10 +18,14 @@ import { ListElementService } from './services/list-element.service';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
+import { TierlistComponent } from './tierlist/tierlist.component';
+import { ItemListComponent } from './tierlist/item-list/item-list.component';
+import { DragDropModule } from '@angular/cdk/drag-drop'
 
 
 const appRoutes: Routes = [
   { path: 'home', canActivate: [AuthGuardService], component: HomeComponent },
+  { path: 'tierlist/:id', canActivate: [AuthGuardService], component: TierlistComponent },
   { path: 'auth/signin', canDeactivate: [CanDeactivateGuard], component: SigninComponent },
   { path: 'auth/signup', canDeactivate: [CanDeactivateGuard], component: SignupComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -35,9 +39,12 @@ const appRoutes: Routes = [
     AppComponent,
     HeaderComponent,
     SigninComponent,
-    SignupComponent
+    SignupComponent,
+    TierlistComponent,
+    ItemListComponent
   ],
   imports: [
+    DragDropModule,
     CommonModule,
     NbCardModule,
     NbButtonModule,
@@ -55,7 +62,7 @@ const appRoutes: Routes = [
     NbInputModule,
     ReactiveFormsModule,
     NbEvaIconsModule,
-    NbIconModule
+    NbIconModule,
   ],
   providers: [AuthService, AuthGuardService, UsersService, ListElementService, CanDeactivateGuard],
   bootstrap: [AppComponent]

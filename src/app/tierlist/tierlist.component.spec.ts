@@ -11,7 +11,9 @@ describe('TierlistComponent', () => {
       declarations: [ TierlistComponent ]
     })
     .compileComponents();
+  });
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(TierlistComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -10,7 +10,7 @@ export class UsersService {
 
   private userSubject = new Subject<User>()
 
-  constructor(private user: User,) { }
+  constructor(private user: User) { }
 
   emitUser() {
     this.userSubject.next(this.user)
@@ -18,9 +18,8 @@ export class UsersService {
 
   saveUser() {
     const db = getDatabase()
-    const almostUniqueName = new Date().toString()
-    this.user.id = almostUniqueName + this.user.lastName
-    set(ref(db, `/email/${almostUniqueName + this.user.lastName}`), this.user)
+    this.user.id = (this.user.email.split('.')).join("")
+    set(ref(db, `/email/${this.user.id}`), this.user)
   }
 
   getUser(userId: string) {

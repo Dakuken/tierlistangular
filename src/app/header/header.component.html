@@ -4,7 +4,7 @@
 <div class="grid">
     <div class="colored-column-warning">
         <button *ngIf="this.isAuth" nbButton outline status="info" (click)="goTo('/home')">Home</button>
-        <button *ngIf="this.isAuth" nbButton outline status="info" (click)="goTo('/tierlist')">Tierlist</button>
+        <button *ngIf="this.isAuth" nbButton outline status="info" (click)="onViewTierlistPerso()">Tierlist</button>
     </div>
 
     <div>
