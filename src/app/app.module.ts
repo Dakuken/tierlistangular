@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbContextMenuModule, NbActionsModule, NbMenuModule, NbButtonModule, NbCardModule, NbDialogModule, NbInputModule, NbIconModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbContextMenuModule, NbActionsModule, NbMenuModule, NbButtonModule, NbCardModule, NbDialogModule, NbInputModule, NbIconModule, NbListModule, NbUserModule } from '@nebular/theme';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -14,18 +14,20 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { UsersService } from './services/users.service';
-import { ListElementService } from './services/list-element.service';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
 import { TierlistComponent } from './tierlist/tierlist.component';
 import { ItemListComponent } from './tierlist/item-list/item-list.component';
 import { DragDropModule } from '@angular/cdk/drag-drop'
+import { ListService } from './services/list.service';
+import { PetitmalinComponent } from './petitmalin/petitmalin.component';
 
 
 const appRoutes: Routes = [
   { path: 'home', canActivate: [AuthGuardService], component: HomeComponent },
   { path: 'tierlist/:id', canActivate: [AuthGuardService], component: TierlistComponent },
+  { path: 'petitmalin', component: PetitmalinComponent },
   { path: 'auth/signin', canDeactivate: [CanDeactivateGuard], component: SigninComponent },
   { path: 'auth/signup', canDeactivate: [CanDeactivateGuard], component: SignupComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -41,11 +43,14 @@ const appRoutes: Routes = [
     SigninComponent,
     SignupComponent,
     TierlistComponent,
-    ItemListComponent
+    ItemListComponent,
+    PetitmalinComponent
   ],
   imports: [
+    NbUserModule,
     DragDropModule,
     CommonModule,
+    NbListModule,
     NbCardModule,
     NbButtonModule,
     NbDialogModule.forRoot(),
@@ -64,7 +69,7 @@ const appRoutes: Routes = [
     NbEvaIconsModule,
     NbIconModule,
   ],
-  providers: [AuthService, AuthGuardService, UsersService, ListElementService, CanDeactivateGuard],
+  providers: [AuthService, AuthGuardService, UsersService, CanDeactivateGuard, ListService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

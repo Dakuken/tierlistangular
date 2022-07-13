@@ -1,26 +1,34 @@
 .example-list {
     width: 500px;
     max-width: 100%;
-    border: solid 1px #ccc;
+    border: solid 1px #13132b;
     min-height: 60px;
     display: block;
-    background: white;
+    background: #252547;
     border-radius: 4px;
     overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .example-box {
+    width: 100%;
     padding: 20px 10px;
-    border-bottom: solid 1px #ccc;
-    color: rgba(0, 0, 0, 0.87);
+    border-bottom: solid 1px #13132b;
+    color: #ffffff;
+
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     box-sizing: border-box;
     cursor: move;
-    background: white;
+    background: #323259;
     font-size: 14px;
+}
+
+.example-box>p {
+    font-weight: bold;
 }
 
 .cdk-drag-preview {
@@ -44,8 +52,8 @@
 }
 
 .example-custom-placeholder {
-    background: #ccc;
-    border: dotted 3px #999;
+    background: #252547;
+    border: dotted 3px #13132b;
     min-height: 60px;
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }

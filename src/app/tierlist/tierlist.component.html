@@ -1,8 +1,16 @@
 <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let movie of movies" cdkDrag>
+    <div class="example-box" *ngFor="let prof of profs" cdkDrag>
         <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-        {{movie}}
+        <p>{{prof.name}}</p>
     </div>
 </div>
-
 <button (click)="test()">heheha</button>
+
+<!-- TODO Afaire plus tard bébou -->
+<!-- <nb-card size="large">.
+    <nb-list cdkDropList (cdkDropListDropped)="drop($event)">
+        <nb-list-item *ngFor="let user of users" cdkDrag>
+            <nb-user [name]="user.name" [title]="user.title" *cdkDragPlaceholder></nb-user>
+        </nb-list-item>
+    </nb-list>
+</nb-card> -->
