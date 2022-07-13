@@ -1,3 +1,17 @@
+.list-group {
+    display: flex;
+    justify-content: center;
+}
+
+.list-container {
+    width: 400px;
+    max-width: 100%;
+    margin: 0 25px 25px 0;
+    display: inline-block;
+    vertical-align: top;
+
+}
+
 .example-list {
     width: 400px;
     max-width: 100%;
@@ -7,8 +21,7 @@
     background: #252547;
     border-radius: 4px;
     overflow: hidden;
-    margin-left: auto;
-    margin-right: auto;
+
 }
 
 .example-box {
@@ -58,7 +71,7 @@
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-#prof {
+.prof {
     display: grid;
     grid-template: 1fr / 70px 100px;
     grid-gap: 15px;
