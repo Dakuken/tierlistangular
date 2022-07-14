@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendEmailVerification } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendEmailVerification, onAuthStateChanged } from "firebase/auth";
 import { ReplaySubject } from 'rxjs';
 import { User } from '../models/User.model';
 import { UsersService } from './users.service';
@@ -18,9 +18,11 @@ export class AuthService {
     return new Promise<void>(
       (resolve, reject) => {
         createUserWithEmailAndPassword(auth, user.email, password)
+
           .then(
-            () => {
-              userService.createNewUser(user)
+            (userCredential) => {
+              userService.createNewUser()
+              const user = userCredential.user;
               resolve()
             },
             (error: Error) => {
@@ -59,7 +61,8 @@ export class AuthService {
       (resolve, reject) => {
         signInWithEmailAndPassword(auth, email, password)
           .then(
-            () => {
+            (userCredential) => {
+              const user = userCredential.user;
               resolve();
             },
             (error: Error) => {
@@ -78,4 +81,10 @@ export class AuthService {
       console.log('An error happened' + error);
     });
   }
+
+  getUID(): string | undefined {
+    const auth = getAuth();
+    return auth.currentUser?.uid
+  }
 }
+

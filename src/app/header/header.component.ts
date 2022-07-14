@@ -47,8 +47,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onViewTierlistPerso() {
-    const auth = getAuth();
-    this.router.navigate(['/tierlist', auth.currentUser?.email])
+    this.router.navigate(['/tierlist/' + this.authService.getUID()])
   }
 
 }

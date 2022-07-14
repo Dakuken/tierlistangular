@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { User } from '../models/User.model';
 import { getDatabase, set, ref, get, child } from "firebase/database";
+import { getAuth } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,9 @@ export class UsersService {
 
   saveUser() {
     const db = getDatabase()
-    this.user.id = (this.user.email.split('.')).join("")
+    const auth = getAuth();
+
+    this.user.id = auth.currentUser?.uid
     set(ref(db, `/email/${this.user.id}`), this.user)
   }
 
@@ -39,7 +42,7 @@ export class UsersService {
     )
   }
 
-  createNewUser(newUser: User) {
+  createNewUser() {
     this.saveUser()
     this.emitUser()
   }

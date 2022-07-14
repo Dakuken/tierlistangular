@@ -4,7 +4,8 @@ import { Subscription } from 'rxjs';
 import { Prof } from '../models/Prof.model';
 import { ListService } from '../services/list.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { getAuth } from 'firebase/auth';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-tierlist',
@@ -15,14 +16,14 @@ export class TierlistComponent implements OnInit {
   profs!: Prof[] | any[]
   profsSubscription!: Subscription
 
-  constructor(private listService: ListService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private listService: ListService, private router: Router, private route: ActivatedRoute, private authService: AuthService) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.params['id']
+    const userId = this.authService.getUID()
+    const pathId = this.route.snapshot.params['id']
     const auth = getAuth();
-    let userEmail = auth.currentUser?.email
 
-    if (id !== userEmail) {
+    if (pathId !== userId) {
       this.router.navigate(['/petitmalin'])
     }
     // this.router.navigate(['/tierlist', auth.currentUser?.email])
@@ -31,7 +32,7 @@ export class TierlistComponent implements OnInit {
         this.profs = profs
       }
     );
-    this.listService.getProfs((userEmail!.split('.')).join(""));
+    this.listService.getProfs();
     this.listService.emitProfs();
 
 
@@ -39,12 +40,6 @@ export class TierlistComponent implements OnInit {
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.profs, event.previousIndex, event.currentIndex);
-  }
-
-  //! onSave(){} pour plus tard je pense
-  test() {
-    console.log('test');
-    console.log(this.profs);
   }
 
   wichPic(name: string) {
@@ -56,18 +51,7 @@ export class TierlistComponent implements OnInit {
     const dropList = event.container;
     const dragIndex = drag.data;
     const dropIndex = dropList.data;
-
-
-    // const phContainer = dropList.element.nativeElement;
-    // const phElement = phContainer.querySelector('.cdk-drag-placeholder');
-    // phContainer.removeChild(phElement!);
-    // phContainer.parentElement!.insertBefore(phElement!, phContainer);
-
     moveItemInArray(this.profs, dragIndex, dropIndex);
-    // this.listService.emitProfs()
-    // this.listService.saveOrderSurtout()
-
-
   }
 
   save() {
@@ -75,4 +59,6 @@ export class TierlistComponent implements OnInit {
       this.listService.saveOrderSurtout()
     }, 1000);
   }
+
+
 }
