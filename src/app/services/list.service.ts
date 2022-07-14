@@ -22,7 +22,6 @@ export class ListService {
     const id = this.authService.getUID()
     const db = getDatabase();
     set(ref(db, `/email/${id}/list`), this.profs).then(() => {
-      console.log('saved');
     }
     ).catch((error) => {
       console.log(error);

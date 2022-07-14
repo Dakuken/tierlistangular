@@ -1,7 +1,5 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { NbDialogService } from '@nebular/theme';
-import { getAuth } from 'firebase/auth';
-import { User } from '../models/User.model';
 
 @Component({
   selector: 'app-home',

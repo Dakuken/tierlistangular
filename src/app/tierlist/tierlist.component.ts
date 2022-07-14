@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { Prof } from '../models/Prof.model';
 import { ListService } from '../services/list.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -35,7 +35,6 @@ export class TierlistComponent implements OnInit {
     this.listService.getProfs();
     this.listService.emitProfs();
 
-
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -57,7 +56,7 @@ export class TierlistComponent implements OnInit {
   save() {
     setTimeout(() => {
       this.listService.saveOrderSurtout()
-    }, 1000);
+    }, 500);
   }
 
 
