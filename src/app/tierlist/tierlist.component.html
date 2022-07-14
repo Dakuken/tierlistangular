@@ -1,50 +1,17 @@
-<div cdkDropListGroup class="list-group">
-
-    <div class="exemple-container">
-        <div class="list-container" cdkDropList [cdkDropListData]="profs1" (cdkDropListDropped)="drop($event)">
-            <div *ngFor="let prof of profs1; let i = index">
-                <div class="example-box" cdkDrag>
+<h1>Votre tierlist</h1>
+<div class="list">
+    <div class="exemple-container" cdkDropListGroup>
+        <div *ngFor="let prof of profs; let i = index" cdkDropList [cdkDropListData]="i" class="restreint">
+            <div class="example-box" cdkDrag>
+                <!-- <p>{{i}}</p> -->
+                <div cdkDrag [cdkDragData]="i" (cdkDragEntered)="dragEntered($event)" class="example-box">
                     <div class="prof">
                         <div class="example-custom-placeholder" *cdkDragPlaceholder> tu la pose ici ?</div>
-                        <nb-user size="giant" [name]="''" [picture]="wichPic(prof)"></nb-user>
-                        <p>{{prof}}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="exemple-container">
-        <div class="list-container" cdkDropList [cdkDropListData]="profs2" (cdkDropListDropped)="drop($event)">
-            <div *ngFor="let prof of profs2; let i = index">
-                <div class="example-box" cdkDrag>
-                    <div class="prof">
-                        <div class="example-custom-placeholder" *cdkDragPlaceholder> tu la pose ici ?</div>
-                        <nb-user size="giant" [name]="''" [picture]="wichPic(prof)"></nb-user>
-                        <p>{{prof}}</p>
+                        <nb-user size="giant" [name]="''" [picture]="wichPic(prof.name)"></nb-user>
+                        <p>{{prof.name}}</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<button (click)="test()">heheha</button>
-
-<!-- 
-<div cdkDropListGroup>
-    <div class="example-container">
-        <h2>To do</h2>
-
-        <div cdkDropList [cdkDropListData]="profs1" class="example-list" (cdkDropListDropped)="drop($event)">
-            <div class="example-box" *ngFor="let prof of profs1" cdkDrag>{{prof}}</div>
-        </div>
-    </div>
-
-    <div class="example-container">
-        <h2>Done</h2>
-
-        <div cdkDropList [cdkDropListData]="profs2" class="example-list" (cdkDropListDropped)="drop($event)">
-            <div class="example-box" *ngFor="let prof of profs2" cdkDrag>{{prof}}</div>
-        </div>
-    </div>
-</div> -->

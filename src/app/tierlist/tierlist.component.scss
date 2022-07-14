@@ -1,43 +1,36 @@
-.list-group {
+.exemple-container {
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+    max-height: 1000px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
-.list-container {
-    width: 400px;
-    max-width: 100%;
-    margin: 0 25px 25px 0;
-    display: inline-block;
-    vertical-align: top;
-
-}
-
-.example-list {
-    width: 400px;
-    max-width: 100%;
-    border: solid 1px #13132b;
-    min-height: 50px;
-    display: block;
-    background: #252547;
-    border-radius: 4px;
-    overflow: hidden;
-
-}
 
 .example-box {
-    width: 100%;
-    padding: 10px 10px;
-    border-bottom: solid 1px #13132b;
+    width: 300px;
+    min-width: 100px;
+    padding: 5px 5px;
     color: #ffffff;
-
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    box-sizing: border-box;
     cursor: move;
     background: #323259;
     font-size: 14px;
+}
+
+.restreint {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    min-width: 100px;
+    width: 500px;
+    max-width: 700px;
+    margin-right: 50px;
 }
 
 .example-box>p {
@@ -45,7 +38,7 @@
 }
 
 .cdk-drag-preview {
-    box-sizing: border-box;
+    min-width: 300px;
     border-radius: 4px;
     box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
         0 8px 10px 1px rgba(0, 0, 0, 0.14),
@@ -67,7 +60,8 @@
 .example-custom-placeholder {
     background: #252547;
     border: dotted 3px #13132b;
-    min-height: 60px;
+    min-height: 100px;
+    width: 300px;
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
@@ -76,5 +70,10 @@
     grid-template: 1fr / 70px 100px;
     grid-gap: 15px;
     align-items: center;
+}
 
+h1 {
+    margin-top: 0;
+    text-align: center;
+    text-transform: uppercase;
 }
