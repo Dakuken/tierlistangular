@@ -4,7 +4,7 @@
         <div *ngFor="let prof of profs; let i = index" cdkDropList [cdkDropListData]="i" class="restreint">
             <div class="example-box" cdkDrag>
                 <!-- <p>{{i}}</p> -->
-                <div cdkDrag [cdkDragData]="i" (cdkDragEntered)="dragEntered($event)" class="example-box">
+                <div cdkDrag [cdkDragData]="i" (cdkDragReleased)="save()" (cdkDragEntered)="dragEntered($event)" class="example-box">
                     <div class="prof">
                         <div class="example-custom-placeholder" *cdkDragPlaceholder> tu la pose ici ?</div>
                         <nb-user size="giant" [name]="''" [picture]="wichPic(prof.name)"></nb-user>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CdkDragDrop, CdkDragEnter, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, CdkDragEnter, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Subscription } from 'rxjs';
 import { Prof } from '../models/Prof.model';
 import { ListService } from '../services/list.service';
@@ -21,6 +21,7 @@ export class TierlistComponent implements OnInit {
     const id = this.route.snapshot.params['id']
     const auth = getAuth();
     let userEmail = auth.currentUser?.email
+
     if (id !== userEmail) {
       this.router.navigate(['/petitmalin'])
     }
@@ -30,7 +31,7 @@ export class TierlistComponent implements OnInit {
         this.profs = profs
       }
     );
-    this.listService.getProfs();
+    this.listService.getProfs((userEmail!.split('.')).join(""));
     this.listService.emitProfs();
 
 
@@ -56,11 +57,22 @@ export class TierlistComponent implements OnInit {
     const dragIndex = drag.data;
     const dropIndex = dropList.data;
 
+
     // const phContainer = dropList.element.nativeElement;
     // const phElement = phContainer.querySelector('.cdk-drag-placeholder');
     // phContainer.removeChild(phElement!);
     // phContainer.parentElement!.insertBefore(phElement!, phContainer);
 
     moveItemInArray(this.profs, dragIndex, dropIndex);
+    // this.listService.emitProfs()
+    // this.listService.saveOrderSurtout()
+
+
+  }
+
+  save() {
+    setTimeout(() => {
+      this.listService.saveOrderSurtout()
+    }, 1000);
   }
 }
