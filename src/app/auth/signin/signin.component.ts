@@ -29,6 +29,7 @@ export class SigninComponent implements OnInit {
   onSubmit() {
     this.listeSercice.profsBase = []
     this.listeSercice.profsUser = []
+    this.listeSercice.profsBaseTemp = []
     const email = this.signUpForm.get('email')?.value
     const password = this.signUpForm.get('password')?.value
     this.authService.signInUser(email, password).then(

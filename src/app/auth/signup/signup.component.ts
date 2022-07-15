@@ -33,6 +33,7 @@ export class SignupComponent implements OnInit {
   onSubmit() {
     this.listeSercice.profsBase = []
     this.listeSercice.profsUser = []
+    this.listeSercice.profsBaseTemp = []
     const firstName = this.signUpForm.get('firstName')?.value
     const lastName = this.signUpForm.get('lastName')?.value
     const email = this.signUpForm.get('email')?.value
