@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { ListService } from 'src/app/services/list.service';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
@@ -12,7 +13,7 @@ export class SigninComponent implements OnInit {
   signUpForm!: FormGroup;
   errorMessage: string = ''
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private listeSercice: ListService) { }
 
   ngOnInit(): void {
     this.initForm()
@@ -26,6 +27,8 @@ export class SigninComponent implements OnInit {
   }
 
   onSubmit() {
+    this.listeSercice.profsBase = []
+    this.listeSercice.profsUser = []
     const email = this.signUpForm.get('email')?.value
     const password = this.signUpForm.get('password')?.value
     this.authService.signInUser(email, password).then(

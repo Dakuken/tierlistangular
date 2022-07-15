@@ -1,0 +1,56 @@
+.exemple-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+    max-height: 1000px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+.example-box {
+    height: 84px;
+    width: 300px;
+    min-width: 100px;
+    padding: 5px 5px;
+    color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: #323259;
+    font-size: 14px;
+}
+
+.restreint {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    min-width: 100px;
+    width: 500px;
+    max-width: 700px;
+    margin-right: 50px;
+}
+
+.example-box>p {
+    font-weight: bold;
+}
+
+
+.example-box:last-child {
+    border: none;
+}
+
+.prof {
+    display: grid;
+    grid-template: 1fr / 70px 100px;
+    grid-gap: 15px;
+    align-items: center;
+}
+
+h1 {
+    margin-top: 0;
+    text-align: center;
+    text-transform: uppercase;
+}

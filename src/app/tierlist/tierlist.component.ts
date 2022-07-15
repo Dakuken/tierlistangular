@@ -26,14 +26,14 @@ export class TierlistComponent implements OnInit {
     if (pathId !== userId) {
       this.router.navigate(['/petitmalin'])
     }
-    // this.router.navigate(['/tierlist', auth.currentUser?.email])
-    this.profsSubscription = this.listService.profsSubject.subscribe(
+    // this.router.navigate(['/tierlist', this.authService.getUID()])
+    this.profsSubscription = this.listService.profsSubjectUser.subscribe(
       (profs: Prof[]) => {
         this.profs = profs
       }
     );
-    this.listService.getProfs();
-    this.listService.emitProfs();
+    this.listService.getProfsUser();
+    this.listService.emitProfsUser()
 
   }
 
@@ -42,7 +42,7 @@ export class TierlistComponent implements OnInit {
   }
 
   wichPic(name: string) {
-    return `../../assets/PhotoProfs/${name.split('.').join('')}.jpg`;
+    return this.listService.getProfPic(name)
   }
 
   dragEntered(event: CdkDragEnter<number>) {

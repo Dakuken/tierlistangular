@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendEmailVerification, onAuthStateChanged } from "firebase/auth";
-import { ReplaySubject } from 'rxjs';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendEmailVerification } from "firebase/auth";
+import { doc, getFirestore, setDoc } from 'firebase/firestore';
 import { User } from '../models/User.model';
-import { UsersService } from './users.service';
+import { FireStoreService } from './fire-store.service';
+import { ListService } from './list.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,18 +11,20 @@ import { UsersService } from './users.service';
 export class AuthService {
 
 
-  constructor() { }
+  constructor(private FireStoreService: FireStoreService) { }
 
-  createNewUser(user: User, password: string) {
-    const userService = new UsersService(user)
+  createNewUser(userMoi: User, password: string) {
+
     const auth = getAuth();
+
+    // const userService = new UsersService(user)
     return new Promise<void>(
       (resolve, reject) => {
-        createUserWithEmailAndPassword(auth, user.email, password)
+        createUserWithEmailAndPassword(auth, userMoi.email, password)
 
           .then(
             (userCredential) => {
-              userService.createNewUser()
+              this.SaveNewUserFireStore(userMoi)
               const user = userCredential.user;
               resolve()
             },
@@ -32,6 +35,13 @@ export class AuthService {
       }
     )
 
+  }
+  async SaveNewUserFireStore(user: User) {
+    const auth = getAuth()
+    user.id = auth.currentUser?.uid
+    const db = getFirestore(this.FireStoreService.app);
+    const id = String(auth.currentUser?.uid)
+    await setDoc(doc(db, "users", id), Object.assign({}, user));
   }
 
   sendSignInLinkToEmail(email: string) {

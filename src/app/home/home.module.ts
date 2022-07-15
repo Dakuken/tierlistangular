@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
-import { NbButtonModule, NbCardModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbUserModule } from '@nebular/theme';
 
 
 
@@ -12,8 +12,7 @@ import { NbButtonModule, NbCardModule } from '@nebular/theme';
   ],
   imports: [
     CommonModule,
-    NbCardModule,
-    NbButtonModule
+    NbUserModule
   ]
 })
 export class HomeModule { }

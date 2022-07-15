@@ -1,13 +1,13 @@
-<ng-template #dialog>
-    <nb-card>
-        <nb-card-header>Dialog</nb-card-header>
-        <nb-card-body>Hello world!</nb-card-body>
-    </nb-card>
-</ng-template>
-
-<nb-card>
-    <nb-card-header>Hello World</nb-card-header>
-    <nb-card-body>
-        <button nbButton (click)="openDialog(dialog)">sef</button>
-    </nb-card-body>
-</nb-card>
+<h1>Tierlist Globale</h1>
+<div class="list">
+    <div class="exemple-container">
+        <div *ngFor="let prof of profs; let i = index" class="restreint">
+            <div class="example-box">
+                <div class="prof">
+                    <nb-user size="giant" [name]="''" [picture]="wichPic(prof.name)"></nb-user>
+                    <p>{{prof.name}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

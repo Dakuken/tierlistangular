@@ -1,6 +1,9 @@
-import { initializeApp } from "firebase/app";
+import { FirebaseApp, initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { collection, getDocs, getFirestore, addDoc, Firestore } from "firebase/firestore";
+import { FireStoreService } from "./services/fire-store.service";
+import { ListService } from "./services/list.service";
 
 @Component({
   selector: 'app-root',
@@ -9,20 +12,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  constructor() {
-    const firebaseConfig = {
-      apiKey: "AIzaSyDTJNUAFKIHhwOzPz0D2pBiVK2a23Glvxw",
-      authDomain: "angular20-32ea6.firebaseapp.com",
-      databaseURL: "https://angular20-32ea6-default-rtdb.firebaseio.com",
-      projectId: "angular20-32ea6",
-      storageBucket: "gs://angular20-32ea6.appspot.com",
-      messagingSenderId: "273572570575",
-      appId: "1:273572570575:web:a1ba09106220abbcfb5eba",
-      measurementId: "G-0LRBM67W8C"
-    };
+  // app: FirebaseApp
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
+  constructor(private FireStoreService: FireStoreService, private listeSercice: ListService) {
   }
 }
+
+
