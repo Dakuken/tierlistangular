@@ -15,11 +15,17 @@ import { ListService } from '../services/list.service';
 export class HomeComponent implements OnInit {
   profs!: Prof[]
   profsSubscription!: Subscription
+  mobile: boolean = false
 
 
   constructor(private listService: ListService) { }
 
   ngOnInit() {
+
+    if (window.screen.width <= 400) {
+      this.mobile = true;
+    }
+
     this.profsSubscription = this.listService.profsSubjectBase.subscribe(
       (profs: Prof[]) => {
         this.profs = profs

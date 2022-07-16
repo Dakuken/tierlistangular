@@ -2,7 +2,8 @@
 <div class="list">
     <div class="exemple-container">
         <div *ngFor="let prof of profs; let i = index" class="restreint">
-            <div class="example-box">
+            <p class="order">{{i}}</p>
+            <div class=" example-box">
                 <div class="prof">
                     <nb-user size="giant" [name]="''" [picture]="wichPic(prof.name)"></nb-user>
                     <p>{{prof.name}}</p>
