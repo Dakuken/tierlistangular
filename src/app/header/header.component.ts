@@ -11,20 +11,56 @@ import { AuthService } from '../services/auth.service';
 })
 export class HeaderComponent implements OnInit {
   isAuth!: boolean
+  mobile: boolean = false
+  itemsAuth: { title: string, click: () => void }[] = [
+    {
+      title: 'Home',
+      click: () => {
+        this.goTo('/home')
+      }
+    },
+    {
+      title: 'Tierlist',
+      click: () => {
+        this.onViewTierlistPerso()
+      }
+    },
+    {
+      title: 'Log out',
+      click: () => {
+        this.onSignOut()
+      }
+    }
+  ]
+  itemsNotAuth: { title: string, click: () => void }[] = [
+    {
+      title: 'Sign In',
+      click: () => {
+        this.goTo('/auth/signin')
+      }
+    },
+    {
+      title: 'Sign up',
+      click: () => {
+        this.goTo('/auth/signup')
+      }
+    }
+  ]
 
   constructor(menu: NbMenuService, private router: Router, private authService: AuthService) {
     menu.onItemClick().subscribe((data) => {
       const item = data.item as any;
-      if (item.link !== undefined) {
-        this.router.navigate([item.link])
-      } else if (item.logout !== undefined) {
-        item.logout()
-      }
+      item.click()
     });
 
   }
 
   ngOnInit(): void {
+
+    if (window.screen.width <= 400) {
+      this.mobile = true;
+    }
+
     const auth = getAuth();
     auth.onAuthStateChanged(
       (user) => {

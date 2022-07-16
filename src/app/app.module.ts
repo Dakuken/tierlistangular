@@ -16,7 +16,7 @@ import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
 import { ListService } from './services/list.service';
 
 //nebular module
-import { NbThemeModule, NbLayoutModule, NbMenuModule, NbButtonModule, NbDialogModule, NbIconModule, } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbMenuModule, NbButtonModule, NbDialogModule, NbIconModule, NbContextMenuModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 // my module
@@ -44,11 +44,12 @@ import { PetitmalinModule } from './petitmalin/petitmalin.module';
     TierlistModule,
     HomeModule,
 
-    NbButtonModule,
-    NbDialogModule.forRoot(),
     NbThemeModule.forRoot({ name: 'cosmic' }),
-    NbLayoutModule,
+    NbDialogModule.forRoot(),
     NbMenuModule.forRoot(),
+    NbContextMenuModule,
+    NbButtonModule,
+    NbLayoutModule,
     NbIconModule,
     NbEvaIconsModule,
   ],

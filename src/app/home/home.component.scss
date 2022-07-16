@@ -1,11 +1,31 @@
-.exemple-container {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-content: center;
-    max-height: 1000px;
-    margin-right: auto;
-    margin-left: auto;
+@media only screen and (min-width: 1200px) {
+    .exemple-container {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-content: center;
+        max-height: 1000px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .restreint {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        min-width: 100px;
+        width: 500px;
+        max-width: 700px;
+        margin-right: 50px;
+    }
+}
+
+@media only screen and (max-width: 1199px) {
+    .exemple-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 
@@ -23,15 +43,6 @@
     font-size: 14px;
 }
 
-.restreint {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    min-width: 100px;
-    width: 500px;
-    max-width: 700px;
-    margin-right: 50px;
-}
 
 .example-box>p {
     font-weight: bold;

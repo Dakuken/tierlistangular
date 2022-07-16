@@ -1,4 +1,4 @@
-<div class="grid">
+<div class="grid" *ngIf="!mobile">
     <div class="colored-column-warning">
         <button *ngIf="this.isAuth" nbButton outline status="info" (click)="goTo('/home')">Home</button>
         <button *ngIf="this.isAuth" nbButton outline status="info" (click)="onViewTierlistPerso()">Tierlist</button>
@@ -10,3 +10,11 @@
         <button *ngIf=" this.isAuth" nbButton outline status="danger" style="opacity : 0.9" class="right" (click)="onSignOut()">Log out</button>
     </div>
 </div>
+
+<button outline nbButton status="success" [nbContextMenu]="itemsAuth" *ngIf="mobile && isAuth" ngCloak>
+    Menu
+</button>
+
+<button outline nbButton status="success" [nbContextMenu]="itemsNotAuth" *ngIf="mobile && !isAuth" ngCloak>
+    Menu
+</button>
