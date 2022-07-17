@@ -1,18 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
-import { NbButtonModule, NbCardModule, NbUserModule } from '@nebular/theme';
+import { NbUserModule } from '@nebular/theme';
+import { LoaderModule } from '../loader/loader.module';
 
 
 
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     CommonModule,
-    NbUserModule
+    NbUserModule,
+    LoaderModule
   ]
 })
 export class HomeModule { }

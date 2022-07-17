@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   profs!: Prof[]
   profsSubscription!: Subscription
   mobile: boolean = false
+  messageError: string = ''
 
 
   constructor(private listService: ListService) { }
@@ -32,6 +33,10 @@ export class HomeComponent implements OnInit {
       }
     );
     this.listService.getProfsBase();
+    setTimeout(() => {
+      this.messageError = this.listService.messageError
+    }, 200);
+
     this.listService.emitProfsBase();
 
   }

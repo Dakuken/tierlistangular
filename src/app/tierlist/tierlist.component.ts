@@ -15,6 +15,7 @@ import { AuthService } from '../services/auth.service';
 export class TierlistComponent implements OnInit {
   profs!: Prof[] | any[]
   profsSubscription!: Subscription
+  messageError: string = ''
 
   constructor(private listService: ListService, private router: Router, private route: ActivatedRoute, private authService: AuthService) { }
 
@@ -33,6 +34,10 @@ export class TierlistComponent implements OnInit {
       }
     );
     this.listService.getProfsUser();
+    setTimeout(() => {
+      this.messageError = this.listService.messageError
+    }, 200);
+
     this.listService.emitProfsUser()
 
   }

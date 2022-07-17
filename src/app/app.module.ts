@@ -28,6 +28,7 @@ import { PetitmalinModule } from './petitmalin/petitmalin.module';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +39,7 @@ import { PetitmalinModule } from './petitmalin/petitmalin.module';
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
+
 
     PetitmalinModule,
     FormModule,
@@ -51,7 +53,8 @@ import { PetitmalinModule } from './petitmalin/petitmalin.module';
     NbButtonModule,
     NbLayoutModule,
     NbIconModule,
-    NbEvaIconsModule,
+    NbEvaIconsModule
+
   ],
   providers: [AuthService, AuthGuardService, UsersService, CanDeactivateGuard, ListService],
   bootstrap: [AppComponent]

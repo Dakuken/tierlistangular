@@ -15,6 +15,7 @@ export class ListService {
   profsBaseTemp: Prof[] = []
   profsSubjectUser = new Subject<Prof[]>();
   profsSubjectBase = new Subject<Prof[]>();
+  messageError = ''
   constructor(private authService: AuthService, private fireStore: FireStoreService) { }
   id: any = []
   data: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -49,6 +50,8 @@ export class ListService {
     const id = auth.currentUser?.uid
     let path = `users/${id}/list`
     this.pouet(path)
+
+
   }
 
   async getProfsBase() {
@@ -77,38 +80,48 @@ export class ListService {
 
 
   async pouet(path: string = 'profs') {
-    const db = getFirestore(this.fireStore.app);
-    if (path === 'profs') {
+    try {
+      const db = getFirestore(this.fireStore.app);
+      if (path === 'profs') {
 
-      const q = query(collection(db, path), orderBy('id'))
-      let querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        let x = doc.data()
-        this.profsBaseTemp.push(new Prof(x['id'], x['name'], x['order']))
-        this.profsBaseTemp.sort((a: Prof, b: Prof) => Number(a.id) - Number(b.id))
-
-      })
-
-    } else {
-      const q = query(collection(db, path))
-      let querySnapshot = await getDocs(q);
-      if (querySnapshot.empty) {
-        const q = query(collection(db, 'profs'))
+        const q = query(collection(db, path), orderBy('id'))
         let querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
           let x = doc.data()
-          this.profsUser.push(new Prof(x['id'], x['name'], x['order']))
-          this.profsUser.sort((a: Prof, b: Prof) => a.order - b.order)
-        })
-      } else {
-        const q = query(collection(db, path))
-        querySnapshot.forEach((doc) => {
-          let x = doc.data()
-          this.profsUser.push(new Prof(x['id'], x['name'], x['order']))
-          this.profsUser.sort((a: Prof, b: Prof) => a.order - b.order)
+          this.profsBaseTemp.push(new Prof(x['id'], x['name'], x['order']))
+          this.profsBaseTemp.sort((a: Prof, b: Prof) => Number(a.id) - Number(b.id))
+
         })
 
+
+      } else {
+        const q = query(collection(db, path))
+        let querySnapshot = await getDocs(q);
+        if (querySnapshot.empty) {
+          const q = query(collection(db, 'profs'))
+          try {
+            let querySnapshot = await getDocs(q);
+            querySnapshot.forEach((doc) => {
+              let x = doc.data()
+              this.profsUser.push(new Prof(x['id'], x['name'], x['order']))
+              this.profsUser.sort((a: Prof, b: Prof) => a.order - b.order)
+            })
+          } catch (error) {
+            this.messageError = String(error)
+          }
+        } else {
+          const q = query(collection(db, path))
+          querySnapshot.forEach((doc) => {
+            let x = doc.data()
+            this.profsUser.push(new Prof(x['id'], x['name'], x['order']))
+            this.profsUser.sort((a: Prof, b: Prof) => a.order - b.order)
+          })
+        }
+
       }
+    } catch (error) {
+      console.log(String(error))
+      this.messageError = String(error)
 
     }
   }

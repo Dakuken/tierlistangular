@@ -2,7 +2,7 @@
 <div class="list">
     <div class="exemple-container">
         <div *ngFor="let prof of profs; let i = index" class="restreint">
-            <p class="order">{{i}}</p>
+            <p class="order">{{i+1}}</p>
             <div class=" example-box">
                 <div class="prof">
                     <nb-user size="giant" [name]="''" [picture]="wichPic(prof.name)"></nb-user>
@@ -12,3 +12,6 @@
         </div>
     </div>
 </div>
+<app-loader *ngIf="!profs && messageError === ''"></app-loader>
+
+<p *ngIf="messageError !== ''">{{messageError}}</p>
