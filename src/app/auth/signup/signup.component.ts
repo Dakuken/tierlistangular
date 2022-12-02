@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from 'src/app/models/User.model';
+import { User } from '../../models/User.model';
 import { AuthService } from 'src/app/services/auth.service';
-import { ListService } from 'src/app/services/list.service';
 
 @Component({
   selector: 'app-signup',
@@ -15,7 +14,7 @@ export class SignupComponent implements OnInit {
   signUpForm!: FormGroup;
   errorMessage: string = ''
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private listeSercice: ListService) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.initForm()
@@ -31,9 +30,6 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit() {
-    this.listeSercice.profsBase = []
-    this.listeSercice.profsUser = []
-    this.listeSercice.profsBaseTemp = []
     const firstName = this.signUpForm.get('firstName')?.value
     const lastName = this.signUpForm.get('lastName')?.value
     const email = this.signUpForm.get('email')?.value

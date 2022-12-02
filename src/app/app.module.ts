@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 // component
 import { HeaderComponent } from './header/header.component';
 
@@ -13,7 +12,6 @@ import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { UsersService } from './services/users.service';
 import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
-import { ListService } from './services/list.service';
 
 //nebular module
 import { NbThemeModule, NbLayoutModule, NbMenuModule, NbButtonModule, NbDialogModule, NbIconModule, NbContextMenuModule } from '@nebular/theme';
@@ -24,6 +22,9 @@ import { HomeModule } from './home/home.module';
 import { TierlistModule } from './tierlist/tierlist.module';
 import { FormModule } from './auth/form.module';
 import { PetitmalinModule } from './petitmalin/petitmalin.module';
+import { ProfService } from './services/profService/prof-service.service';
+import { GetProfService } from './services/profService/get-prof.service';
+import { SaveProfService } from './services/profService/save-prof.service';
 
 
 
@@ -41,6 +42,7 @@ import { PetitmalinModule } from './petitmalin/petitmalin.module';
     BrowserAnimationsModule,
 
 
+
     PetitmalinModule,
     FormModule,
     TierlistModule,
@@ -56,7 +58,7 @@ import { PetitmalinModule } from './petitmalin/petitmalin.module';
     NbEvaIconsModule
 
   ],
-  providers: [AuthService, AuthGuardService, UsersService, CanDeactivateGuard, ListService],
+  providers: [AuthService, AuthGuardService, UsersService, CanDeactivateGuard, ProfService, GetProfService, SaveProfService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

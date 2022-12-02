@@ -3,7 +3,6 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, si
 import { doc, getFirestore, setDoc } from 'firebase/firestore';
 import { User } from '../models/User.model';
 import { FireStoreService } from './fire-store.service';
-import { ListService } from './list.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +13,11 @@ export class AuthService {
   constructor(private FireStoreService: FireStoreService) { }
 
   createNewUser(userMoi: User, password: string) {
-
     const auth = getAuth();
-
     // const userService = new UsersService(user)
     return new Promise<void>(
       (resolve, reject) => {
         createUserWithEmailAndPassword(auth, userMoi.email, password)
-
           .then(
             (userCredential) => {
               this.SaveNewUserFireStore(userMoi)
@@ -34,8 +30,8 @@ export class AuthService {
           )
       }
     )
-
   }
+
   async SaveNewUserFireStore(user: User) {
     const auth = getAuth()
     user.id = auth.currentUser?.uid

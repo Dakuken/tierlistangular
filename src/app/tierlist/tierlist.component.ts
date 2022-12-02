@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, CdkDragEnter, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Subscription } from 'rxjs';
-import { Prof } from '../models/Prof.model';
-import { ListService } from '../services/list.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { getAuth } from 'firebase/auth';
 import { AuthService } from '../services/auth.service';
+import { Prof } from '../interface/Prof.interface';
+import { GetProfService } from '../services/profService/get-prof.service';
+import { SaveProfService } from '../services/profService/save-prof.service';
 
 @Component({
   selector: 'app-tierlist',
@@ -17,38 +18,41 @@ export class TierlistComponent implements OnInit {
   profsSubscription!: Subscription
   messageError: string = ''
 
-  constructor(private listService: ListService, private router: Router, private route: ActivatedRoute, private authService: AuthService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService, private getProf: GetProfService, private saveProfService: SaveProfService) { }
 
   ngOnInit(): void {
     const userId = this.authService.getUID()
     const pathId = this.route.snapshot.params['id']
-    const auth = getAuth();
-
     if (pathId !== userId) {
       this.router.navigate(['/petitmalin'])
     }
-    // this.router.navigate(['/tierlist', this.authService.getUID()])
-    this.profsSubscription = this.listService.profsSubjectUser.subscribe(
+    this.router.navigate(['/tierlist', this.authService.getUID()])
+
+    this.profsSubscription = this.getProf.profsSubject.subscribe(
       (profs: Prof[]) => {
         this.profs = profs
       }
     );
-    this.listService.getProfsUser();
-    setTimeout(() => {
-      this.messageError = this.listService.messageError
-    }, 200);
+    this.getProf.emitProfs()
 
-    this.listService.emitProfsUser()
+    this.getProf.getProfs()
+    //   this.listService.getProfsUser();
+    //   setTimeout(() => {
+    //     this.messageError = this.listService.messageError
+    //   }, 200);
 
+    //   this.listService.emitProfsUser()
+
+    // }
   }
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.profs, event.previousIndex, event.currentIndex);
   }
 
-  wichPic(name: string) {
-    return this.listService.getProfPic(name)
-  }
+  // wichPic(name: string) {
+  //   return this.listService.getProfPic(name)
+  // }
 
   dragEntered(event: CdkDragEnter<number>) {
     const drag = event.item;
@@ -60,7 +64,7 @@ export class TierlistComponent implements OnInit {
 
   save() {
     setTimeout(() => {
-      this.listService.saveOrderSurtout()
+      this.saveProfService.writeUserTierlis(this.authService.getUID()!)
     }, 500);
   }
 

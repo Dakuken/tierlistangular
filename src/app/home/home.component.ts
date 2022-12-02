@@ -1,11 +1,7 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { NbDialogService } from '@nebular/theme';
-import { child } from 'firebase/database';
-import { collection, getDocs, getFirestore, orderBy, query, where } from 'firebase/firestore';
+import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Prof } from '../models/Prof.model';
-import { FireStoreService } from '../services/fire-store.service';
-import { ListService } from '../services/list.service';
+import { Prof } from '../interface/Prof.interface';
+import { GetProfService } from '../services/profService/get-prof.service';
 
 @Component({
   selector: 'app-home',
@@ -13,39 +9,29 @@ import { ListService } from '../services/list.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  profs!: Prof[]
+  profs: Prof[] = []
   profsSubscription!: Subscription
   mobile: boolean = false
   messageError: string = ''
 
 
-  constructor(private listService: ListService) { }
+  constructor(private getProfService: GetProfService) { }
+
 
   ngOnInit() {
-
     if (window.screen.width <= 400) {
       this.mobile = true;
     }
-
-    this.profsSubscription = this.listService.profsSubjectBase.subscribe(
-      (profs: Prof[]) => {
+    this.profsSubscription = this.getProfService.profsSubject.subscribe(
+      (profs) => {
         this.profs = profs
-      }
-    );
-    this.listService.getProfsBase();
-    setTimeout(() => {
-      this.messageError = this.listService.messageError
-    }, 200);
-
-    this.listService.emitProfsBase();
-
+      });
+    this.getProfService.emitProfs()
+    this.getProfService.getProfs()
+    console.log('ahaha');
   }
 
-  wichPic(name: string) {
-    return this.listService.getProfPic(name)
+  showProfs() {
+    console.log(this.profs);
   }
-
-
-
-
 }

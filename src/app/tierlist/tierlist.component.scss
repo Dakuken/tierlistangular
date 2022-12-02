@@ -1,114 +1,114 @@
 @media only screen and (min-width: 701px) {
-    .exemple-container {
-        flex-wrap: wrap;
-        align-content: center;
-        max-height: 900px;
-        margin-right: auto;
-        margin-left: auto;
-    }
+  .exemple-container {
+    flex-wrap: wrap;
+    align-content: center;
+    max-height: 900px;
+    margin-right: auto;
+    margin-left: auto;
+  }
 
-    .restreint {
-        width: 400px;
-        margin-right: 25px;
-        margin-left: 25px;
-    }
+  .restreint {
+    width: 400px;
+    margin-right: 25px;
+    margin-left: 25px;
+  }
 
-    .example-box {
-        display: flex;
-        flex-direction: column;
-        width: 300px;
-        min-width: 75px;
-    }
+  .example-box {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    min-width: 75px;
+  }
 
-    .prof {
-        display: flex;
-        flex-direction: column;
-    }
+  .prof {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 
 
 @media only screen and (max-width: 1200px) and (min-width: 701px) {
-    .restreint {
-        min-width: 100px;
-        width: 300px;
-        max-width: 500px;
-        margin-right: 25px;
-        margin-left: 25px;
-    }
+  .restreint {
+    min-width: 100px;
+    width: 300px;
+    max-width: 500px;
+    margin-right: 25px;
+    margin-left: 25px;
+  }
 }
 
 .example-box {
-    height: 84px;
-    padding: 5px 5px;
-    color: #ffffff;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    background: #323259;
-    font-size: 14px;
+  height: 84px;
+  padding: 5px 5px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background: #323259;
+  font-size: 14px;
 }
 
 .restreint {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .exemple-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .example-box>p {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 
 .example-box:last-child {
-    border: none;
+  border: none;
 }
 
 .prof {
-    display: grid;
-    grid-template: 1fr / 70px minmax(55px, 120px);
-    grid-gap: 15px;
-    align-items: center;
+  display: grid;
+  grid-template: 1fr / 70px minmax(55px, 120px);
+  grid-gap: 15px;
+  align-items: center;
 }
 
 h1 {
-    margin-top: 0;
-    text-align: center;
-    text-transform: uppercase;
+  margin-top: 0;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .order {
-    width: 15px;
-    margin: 1rem;
-    font-size: 1.25rem;
+  width: 15px;
+  margin: 1rem;
+  font-size: 1.25rem;
 }
 
 .example-custom-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 84px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 84px;
 
-    // background: #252547;
-    // border: dotted 3px #13132b;
-    // width: 300px;
+  // background: #252547;
+  // border: dotted 3px #13132b;
+  // width: 300px;
 }
 
 .PASTOUCHE {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 app-loader {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }

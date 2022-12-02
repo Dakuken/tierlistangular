@@ -1,21 +1,20 @@
 <h1>Votre tierlist</h1>
 <div *ngIf="profs && messageError === ''">
-
-    <div class="list">
-        <div class="exemple-container" cdkDropListGroup>
-            <div *ngFor="let prof of profs; let i = index" cdkDropList [cdkDropListData]="i" class="restreint">
-                <div class="PASTOUCHE">
-                    <div cdkDrag [cdkDragData]="i" (cdkDragReleased)="save()" (cdkDragEntered)="dragEntered($event)" class="example-box">
-                        <p class="order">{{i}}</p>
-                        <div class="prof">
-                            <nb-user size="giant" [name]="''" [picture]="wichPic(prof.name)"></nb-user>
-                            <p>{{prof.name}}</p>
-                        </div>
-                    </div>
-                </div>
+  <div class="list">
+    <div class="exemple-container" cdkDropListGroup>
+      <div *ngFor="let prof of profs; let i = index" cdkDropList [cdkDropListData]="i" class="restreint">
+        <div class="PASTOUCHE">
+          <div cdkDrag [cdkDragData]="i" (cdkDragReleased)="save()" (cdkDragEntered)="dragEntered($event)" class="example-box">
+            <p class="order">{{i}}</p>
+            <div class="prof">
+              <nb-user size="giant" [name]="''" [picture]="'../../assets/duck-meme.gif'"></nb-user>
+              <p>{{prof.name}}</p>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 <app-loader *ngIf="!profs && messageError === ''"></app-loader>
 
