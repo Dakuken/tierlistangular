@@ -2,12 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, CdkDragEnter, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { getAuth } from 'firebase/auth';
-import { AuthService } from '../services/auth.service';
-import { Prof } from '../interface/Prof.interface';
-import { GetProfService } from '../services/profService/get-prof.service';
-import { SaveProfService } from '../services/profService/save-prof.service';
-
+import { Prof } from 'src/app/interface/Prof.interface';
+import { AuthService } from 'src/app/services/auth.service';
+import { GetProfService } from 'src/app/services/profService/get-prof.service';
+import { SaveProfService } from 'src/app/services/profService/save-prof.service';
 @Component({
   selector: 'app-tierlist',
   templateUrl: './tierlist.component.html',

@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // component
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent } from './components/header/header.component';
 
 //service
 import { AuthService } from './services/auth.service';
@@ -18,13 +18,14 @@ import { NbThemeModule, NbLayoutModule, NbMenuModule, NbButtonModule, NbDialogMo
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 // my module
-import { HomeModule } from './home/home.module';
-import { TierlistModule } from './tierlist/tierlist.module';
-import { FormModule } from './auth/form.module';
-import { PetitmalinModule } from './petitmalin/petitmalin.module';
+import { HomeModule } from './pages/home/home.module';
+import { AuthModule } from './pages/auth/auth.module';
+import { PetitmalinModule } from './pages/petitmalin/petitmalin.module';
 import { ProfService } from './services/profService/prof-service.service';
 import { GetProfService } from './services/profService/get-prof.service';
 import { SaveProfService } from './services/profService/save-prof.service';
+import { ShowTierlistModule } from './pages/tierlist/show-tierlist/components/show-tierlist.module';
+import { CreateTierlistModule } from './pages/tierlist/create-tierlist/components/create-tierlist.module';
 
 
 
@@ -44,9 +45,10 @@ import { SaveProfService } from './services/profService/save-prof.service';
 
 
     PetitmalinModule,
-    FormModule,
-    TierlistModule,
+    AuthModule,
+    ShowTierlistModule,
     HomeModule,
+    CreateTierlistModule,
 
     NbThemeModule.forRoot({ name: 'cosmic' }),
     NbDialogModule.forRoot(),

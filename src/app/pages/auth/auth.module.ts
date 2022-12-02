@@ -14,4 +14,4 @@ import { SignupComponent } from './signup/signup.component';
     NbInputModule,
   ],
 })
-export class FormModule { }
+export class AuthModule { }

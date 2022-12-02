@@ -1,20 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { User } from '../../models/User.model';
-import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss'],
+  selector: 'app-create-tierlist',
+  templateUrl: './create-tierlist.component.html',
+  styleUrls: ['./create-tierlist.component.scss']
 })
-export class SignupComponent implements OnInit {
+export class CreateTierlistComponent implements OnInit {
 
   signUpForm!: FormGroup;
   errorMessage: string = ''
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.initForm()
@@ -34,19 +31,7 @@ export class SignupComponent implements OnInit {
     const lastName = this.signUpForm.get('lastName')?.value
     const email = this.signUpForm.get('email')?.value
     const password = this.signUpForm.get('password')?.value
-    const user = new User(email, firstName, lastName)
-    this.authService.createNewUser(user, password).then(
-      () => {
-        console.log('sign up successefuly');
-        this.router.navigate(['/home'])
-      },
-      (error) => {
-        this.errorMessage = error
-        console.log('erreur : ' + error);
-
-      }
-    )
-
   }
+
 
 }
