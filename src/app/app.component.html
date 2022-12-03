@@ -1,19 +1,15 @@
 <nb-layout>
+  <nb-layout-header class='fixed'>
+    <app-header class="w-full"></app-header>
+  </nb-layout-header>
 
-  <nb-layout-column>
-    <nb-layout>
-      <nb-layout-header fixed>
-        <app-header style="width: 100%;"></app-header>
-      </nb-layout-header>
-
-      <nb-layout-column class="colored-column-basic">
-        <router-outlet></router-outlet>
-      </nb-layout-column>
-
-      <nb-layout-footer fixed>
-        <p style="font-size: 1.25rem;">Created with <nb-icon icon="heart-outline" status="danger" style="font-size: 1.50rem;"></nb-icon> by myself, made with Angular.</p>
-      </nb-layout-footer>
-    </nb-layout>
+  <nb-layout-column class="h-4/5">
+    <router-outlet></router-outlet>
   </nb-layout-column>
 
+  <nb-layout-footer class='absolute bottom-0 w-full text-center'>
+    <div class="flex items-center justify-center leading-3">
+      <p class="sm:text-xl ">Created with <nb-icon icon="heart-outline" status="danger" class="sm:text-2xl relative top-1"></nb-icon> by myself, made with Angular.</p>
+    </div>
+  </nb-layout-footer>
 </nb-layout>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { getAuth } from '@firebase/auth';
 import { NbMenuService } from '@nebular/theme';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -57,7 +57,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if (window.screen.width <= 400) {
+    if (window.screen.width <= 500) {
       this.mobile = true;
     }
 

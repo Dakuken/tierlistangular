@@ -8,10 +8,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/header/header.component';
 
 //service
-import { AuthService } from './services/auth.service';
-import { AuthGuardService } from './services/auth-guard.service';
+import { AuthService } from './services/auth/auth.service';
+import { AuthGuardService } from './services/auth/auth-guard.service';
 import { UsersService } from './services/users.service';
-import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
+import { CanDeactivateGuard } from './services/auth/can-deactivate-guard.service';
 
 //nebular module
 import { NbThemeModule, NbLayoutModule, NbMenuModule, NbButtonModule, NbDialogModule, NbIconModule, NbContextMenuModule } from '@nebular/theme';
@@ -21,11 +21,11 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { HomeModule } from './pages/home/home.module';
 import { AuthModule } from './pages/auth/auth.module';
 import { PetitmalinModule } from './pages/petitmalin/petitmalin.module';
-import { ProfService } from './services/profService/prof-service.service';
 import { GetProfService } from './services/profService/get-prof.service';
 import { SaveProfService } from './services/profService/save-prof.service';
 import { ShowTierlistModule } from './pages/tierlist/show-tierlist/components/show-tierlist.module';
-import { CreateTierlistModule } from './pages/tierlist/create-tierlist/components/create-tierlist.module';
+import { CreateTierlistModule } from './pages/tierlist/create-tierlist/create-tierlist.module';
+import { FireStoreService } from './services/fire-store.service';
 
 
 
@@ -34,7 +34,7 @@ import { CreateTierlistModule } from './pages/tierlist/create-tierlist/component
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
+    HeaderComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +50,7 @@ import { CreateTierlistModule } from './pages/tierlist/create-tierlist/component
     HomeModule,
     CreateTierlistModule,
 
-    NbThemeModule.forRoot({ name: 'cosmic' }),
+    NbThemeModule.forRoot({ name: 'dark' }),
     NbDialogModule.forRoot(),
     NbMenuModule.forRoot(),
     NbContextMenuModule,
@@ -60,7 +60,7 @@ import { CreateTierlistModule } from './pages/tierlist/create-tierlist/component
     NbEvaIconsModule
 
   ],
-  providers: [AuthService, AuthGuardService, UsersService, CanDeactivateGuard, ProfService, GetProfService, SaveProfService],
+  providers: [AuthService, AuthGuardService, UsersService, CanDeactivateGuard, FireStoreService, GetProfService, SaveProfService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

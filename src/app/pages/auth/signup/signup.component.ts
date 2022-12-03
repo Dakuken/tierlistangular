@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from '../../../models/User.model';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -40,7 +40,7 @@ export class SignupComponent implements OnInit {
         console.log('sign up successefuly');
         this.router.navigate(['/home'])
       },
-      (error) => {
+      (error: any) => {
         this.errorMessage = error
         console.log('erreur : ' + error);
 

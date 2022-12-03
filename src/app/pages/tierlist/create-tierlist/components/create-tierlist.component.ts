@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-create-tierlist',
@@ -8,22 +8,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CreateTierlistComponent implements OnInit {
 
-  signUpForm!: FormGroup;
+  @Input() signUpForm!: FormGroup;
   errorMessage: string = ''
 
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.initForm()
-  }
-
-  initForm() {
-    this.signUpForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]]
-    })
   }
 
   onSubmit() {

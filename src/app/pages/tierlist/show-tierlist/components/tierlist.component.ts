@@ -3,7 +3,7 @@ import { CdkDragDrop, CdkDragEnter, moveItemInArray } from '@angular/cdk/drag-dr
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Prof } from 'src/app/interface/Prof.interface';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { GetProfService } from 'src/app/services/profService/get-prof.service';
 import { SaveProfService } from 'src/app/services/profService/save-prof.service';
 @Component({
