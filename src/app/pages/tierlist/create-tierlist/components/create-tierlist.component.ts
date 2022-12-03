@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
@@ -9,18 +9,21 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class CreateTierlistComponent implements OnInit {
 
   @Input() signUpForm!: FormGroup;
-  errorMessage: string = ''
+  @Input() errorMessage!: string;
 
-  constructor(private formBuilder: FormBuilder) { }
+  @Output() onSubmitFormEvent = new EventEmitter<{ name: string, description: string, private: boolean }>();
+
+  constructor() { }
 
   ngOnInit(): void {
   }
 
   onSubmit() {
-    const firstName = this.signUpForm.get('firstName')?.value
-    const lastName = this.signUpForm.get('lastName')?.value
-    const email = this.signUpForm.get('email')?.value
-    const password = this.signUpForm.get('password')?.value
+    const name = this.signUpForm.get('name')?.value
+    //? utilisation de ||= au cas ou c'est null pour avoir quand meme un string
+    const description = (<string>this.signUpForm.get('description')!.value) ||= ' '
+    const prive = this.signUpForm.get('private')?.value
+    this.onSubmitFormEvent.emit({ name, description, private: prive })
   }
 
 

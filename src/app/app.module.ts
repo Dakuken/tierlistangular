@@ -14,7 +14,7 @@ import { UsersService } from './services/users.service';
 import { CanDeactivateGuard } from './services/auth/can-deactivate-guard.service';
 
 //nebular module
-import { NbThemeModule, NbLayoutModule, NbMenuModule, NbButtonModule, NbDialogModule, NbIconModule, NbContextMenuModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbMenuModule, NbButtonModule, NbDialogModule, NbIconModule, NbContextMenuModule, NbAlertModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 // my module
@@ -26,6 +26,13 @@ import { SaveProfService } from './services/profService/save-prof.service';
 import { ShowTierlistModule } from './pages/tierlist/show-tierlist/components/show-tierlist.module';
 import { CreateTierlistModule } from './pages/tierlist/create-tierlist/create-tierlist.module';
 import { FireStoreService } from './services/fire-store.service';
+import { EditTierlistModule } from './pages/tierlist/edit-tierlist/edit-tierlist.module';
+import { CreateTierlistService } from './services/tierlist/create-tierlist.service';
+import { EditTierlistService } from './services/tierlist/edit-tierlist.service';
+import { GetTierlistService } from './services/tierlist/get-tierlist.service';
+import { AllTierlistService } from './services/tierlist/all-tierlist.service';
+import { AlertComponent } from './components/alert/alert.component';
+import { AlertModule } from './components/alert/alert.module';
 
 
 
@@ -34,7 +41,7 @@ import { FireStoreService } from './services/fire-store.service';
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
   imports: [
     CommonModule,
@@ -42,13 +49,12 @@ import { FireStoreService } from './services/fire-store.service';
     BrowserModule,
     BrowserAnimationsModule,
 
-
-
     PetitmalinModule,
     AuthModule,
     ShowTierlistModule,
     HomeModule,
     CreateTierlistModule,
+    EditTierlistModule,
 
     NbThemeModule.forRoot({ name: 'dark' }),
     NbDialogModule.forRoot(),
@@ -57,10 +63,11 @@ import { FireStoreService } from './services/fire-store.service';
     NbButtonModule,
     NbLayoutModule,
     NbIconModule,
-    NbEvaIconsModule
+    NbEvaIconsModule,
+    NbAlertModule
 
   ],
-  providers: [AuthService, AuthGuardService, UsersService, CanDeactivateGuard, FireStoreService, GetProfService, SaveProfService],
+  providers: [AuthService, AuthGuardService, UsersService, CanDeactivateGuard, FireStoreService, GetProfService, SaveProfService, CreateTierlistService, EditTierlistService, GetTierlistService, AllTierlistService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

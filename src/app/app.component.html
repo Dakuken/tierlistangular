@@ -5,11 +5,14 @@
 
   <nb-layout-column class="h-4/5">
     <router-outlet></router-outlet>
+    <div class="ban bottom-5 z-20 justify-center flex w-full">
+      <nb-alert @anim status="danger" *ngIf="exist">Vous avez été expulsé de la partie</nb-alert>
+    </div>
   </nb-layout-column>
 
-  <nb-layout-footer class='absolute bottom-0 w-full text-center'>
+  <!-- <nb-layout-footer class='absolute bottom-0 w-full text-center'>
     <div class="flex items-center justify-center leading-3">
       <p class="sm:text-xl ">Created with <nb-icon icon="heart-outline" status="danger" class="sm:text-2xl relative top-1"></nb-icon> by myself, made with Angular.</p>
     </div>
-  </nb-layout-footer>
+  </nb-layout-footer> -->
 </nb-layout>

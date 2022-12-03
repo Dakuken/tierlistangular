@@ -16,6 +16,7 @@ export const environment = {
   }
 }
 
+export let tierlistNotExist: { state: boolean } = { state: false }
 
 /*
  * For easier debugging in development mode, you can import the following file

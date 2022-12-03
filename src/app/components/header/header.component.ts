@@ -82,6 +82,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigate([chemin])
   }
 
+  editTierlist() {
+    this.router.navigate(['/Edit-Tierlist', this.authService.getUID()])
+  }
+
   onViewTierlistPerso() {
     this.router.navigate(['/tierlist/' + this.authService.getUID()])
   }

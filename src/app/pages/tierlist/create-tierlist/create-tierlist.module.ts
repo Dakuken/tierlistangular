@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbButtonModule, NbCardModule, NbFormFieldModule, NbInputModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbFormFieldModule, NbInputModule, NbRadioModule } from '@nebular/theme';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateTierlistComponent } from './components/create-tierlist.component';
 import { SmartCreateTierlist } from './smart/create-tierlist.smart.component';
@@ -16,7 +16,9 @@ import { SmartCreateTierlist } from './smart/create-tierlist.smart.component';
     ReactiveFormsModule,
     NbFormFieldModule,
     NbInputModule,
-    NbButtonModule
-  ]
+    NbButtonModule,
+    NbRadioModule,
+
+  ],
 })
 export class CreateTierlistModule { }

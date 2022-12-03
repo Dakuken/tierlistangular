@@ -1,18 +1,22 @@
 .left {
-    margin-left: auto;
+  margin-left: auto;
 }
 
 .profile {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 nb-layout-column {
-    padding: 1.75rem 0 0 0 !important;
-    margin: 0 !important;
+  padding: 1.75rem 0 0 0 !important;
+  margin: 0 !important;
 }
 
 nb-layout-footer {
-    padding: 0 0 0 0 !important;
-    margin: 1.25rem 0 0 0 !important;
+  padding: 0 0 0 0 !important;
+  margin: 1.25rem 0 0 0 !important;
 
+}
+
+.ban {
+  position: fixed !important;
 }

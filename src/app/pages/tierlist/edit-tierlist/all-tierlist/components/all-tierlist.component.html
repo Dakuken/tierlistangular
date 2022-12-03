@@ -1,0 +1,22 @@
+<div class="flex justify-center">
+  <nb-card accent="info" class="lg:w-1/2">
+    <nb-card-header class="text-xl">Vos tierlist</nb-card-header>
+    <nb-card-body>
+      <nb-card class="back" *ngFor="let tierlist of tierlists">
+        <nb-card-header>
+          <div class="flex flex-row justify-between items-center">
+            <div class="flex flex-row items-center justify-center ">
+              <p class="text-xl font-semibold capitalize ">{{tierlist.name}}</p>
+              <div class="flex flex-row mx-6">
+                <nb-icon icon="info-outline" [status]="tierlist.isPublic ? 'success' : 'danger'"></nb-icon>
+                <p class="mx-2">{{tierlist.isPublic ? 'Public' : 'Private'}}</p>
+              </div>
+            </div>
+            <button nbButton outline status="success" (click)="onEdit(tierlist)">Edit</button>
+          </div>
+        </nb-card-header>
+        <nb-card-body>{{tierlist.description !== ' ' ? tierlist.description : 'Pas de description'}}</nb-card-body>
+      </nb-card>
+    </nb-card-body>
+  </nb-card>
+</div>
