@@ -32,7 +32,7 @@ export class SmartCreateTierlist implements OnInit {
       if (msg !== 'ok') {
         this.errorMessage = msg
       } else {
-        this.router.navigate([`Edit-Tierlist/${this.authService.getUID()}/${ev.name}`])
+        this.router.navigate([`Edit-Tierlist/${this.authService.getUID()}/${ev.name}-${this.authService.getUID()}`])
       }
     })
   }
