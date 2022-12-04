@@ -1,6 +1,16 @@
 <div class="w-full flex justify-center">
-  <nb-card status="info" class="sm:w-1/4">
-    <nb-card-header></nb-card-header>
+  <nb-card class="sm:w-1/4">
+    <nb-card-header>
+      <div class="flex flex-row justify-between items-align">
+        <div class="flex flex-row justify-between items-align ">
+          <p #title contenteditable="true" class="w-full text-2xl text-center align-middle lnheigth">{{tierlist.name}}</p>
+          <nb-icon for='#title' icon="edit-2-outline" class="text-4xl "></nb-icon>
+        </div>
+        <div>
+          <nb-toggle (click)="onPublic()" [checked]="leTrue" [@toggle]="isPublic ? ' public' : 'private'" [status]="isPublic ? 'success' : 'danger'">{{isPublic ? ' public' : 'privé' }}</nb-toggle>
+        </div>
+      </div>
+    </nb-card-header>
     <nb-card-body></nb-card-body>
   </nb-card>
 </div>

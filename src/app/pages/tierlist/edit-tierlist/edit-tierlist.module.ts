@@ -4,7 +4,7 @@ import { SmartEditTierlistComponent } from './one-tierlist/smart/edit-tierlist.s
 import { EditTierlistComponent } from './one-tierlist/components/edit-tierlist.component';
 import { SmartAllTierlistComponent } from './all-tierlist/smart/all-tierlist.smart.component';
 import { AllTierlistComponent } from './all-tierlist/components/all-tierlist.component';
-import { NbButtonModule, NbCardModule, NbIconModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbIconModule, NbToggleModule } from '@nebular/theme';
 
 
 
@@ -14,7 +14,8 @@ import { NbButtonModule, NbCardModule, NbIconModule } from '@nebular/theme';
     CommonModule,
     NbCardModule,
     NbButtonModule,
-    NbIconModule
+    NbIconModule,
+    NbToggleModule
   ]
 })
 export class EditTierlistModule { }

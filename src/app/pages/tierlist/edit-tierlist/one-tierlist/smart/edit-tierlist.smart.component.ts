@@ -7,7 +7,7 @@ import { TierlistNotExistService } from 'src/app/services/tierlist-not-exist.ser
 import { EditTierlistService } from 'src/app/services/tierlist/edit-tierlist.service';
 @Component({
   selector: 'app-smart-edit-tierlist',
-  template: `<app-edit-tierlist></app-edit-tierlist>`,
+  template: `<app-edit-tierlist [tierlist]="tierlist" [isPublic]="isPublic"></app-edit-tierlist>`,
 })
 export class SmartEditTierlistComponent implements OnInit {
   tierlist!: Tierlist
@@ -15,6 +15,7 @@ export class SmartEditTierlistComponent implements OnInit {
   existSubscription!: Subscription
   exist!: boolean
   messageError: string = ''
+  isPublic!: boolean
 
   constructor(private editTierlistService: EditTierlistService, private authService: AuthService, private route: ActivatedRoute, private router: Router, private existService: TierlistNotExistService) { }
 
@@ -27,10 +28,10 @@ export class SmartEditTierlistComponent implements OnInit {
     }
 
 
-    //TODO Verif si la tierlist existe, si non retour au choix tierlist
     this.tierlistSubscription = this.editTierlistService.tierlistSubject.subscribe(
       (tierlist: Tierlist) => {
         this.tierlist = tierlist
+        this.isPublic = this.tierlist.isPublic
       }
     );
 
@@ -49,6 +50,9 @@ export class SmartEditTierlistComponent implements OnInit {
         this.router.navigate(['/Edit-Tierlist', this.authService.getUID()])
       }
     })
+
+
+
 
 
   }
