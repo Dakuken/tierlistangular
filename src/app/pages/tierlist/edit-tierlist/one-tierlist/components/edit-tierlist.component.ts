@@ -20,9 +20,9 @@ import { Tierlist } from 'src/app/interface/tierlist.interface';
   ]
 })
 export class EditTierlistComponent implements OnInit {
-  @Input() tierlist!: Tierlist
+  @Input() tierlist: Tierlist = { author: ' sdf', description: ' sdfs', isPublic: false, items: [], name: ' sdfds' }
   @Input() isPublic: boolean = false
-  leTrue = true
+  editTitle: boolean = false
   constructor() { }
 
   ngOnInit(): void {
@@ -30,6 +30,16 @@ export class EditTierlistComponent implements OnInit {
 
   onPublic() {
     this.isPublic = !this.isPublic
+  }
+
+  onEditTitle() {
+    if (this.editTitle) return
+    this.editTitle = !this.editTitle
+  }
+
+  onAddItem(wsh: any) {
+    console.log(wsh);
+
   }
 
 }

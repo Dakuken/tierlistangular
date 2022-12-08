@@ -1,7 +1,7 @@
 <div class="grid" *ngIf="!mobile">
   <div class="colored-column-warning">
     <button *ngIf="this.isAuth" nbButton outline status="info" (click)="goTo('/home')">Home</button>
-    <button *ngIf="this.isAuth" nbButton outline status="info" (click)="onViewTierlistPerso()">Tierlist</button>
+    <button *ngIf="this.isAuth" nbButton outline status="info" (click)="onViewTierlistPerso()">My Tierlist</button>
     <button *ngIf="this.isAuth" nbButton outline status="info" (click)="goTo('/CreateTierlList')">Create Tierlist</button>
     <button *ngIf="this.isAuth" nbButton outline status="info" (click)="editTierlist()">Edit Tierlist</button>
   </div>
