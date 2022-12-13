@@ -31,8 +31,6 @@ import { CreateTierlistService } from './services/tierlist/create-tierlist.servi
 import { EditTierlistService } from './services/tierlist/edit-tierlist.service';
 import { GetTierlistService } from './services/tierlist/get-tierlist.service';
 import { AllTierlistService } from './services/tierlist/all-tierlist.service';
-import { AlertComponent } from './components/alert/alert.component';
-import { AlertModule } from './components/alert/alert.module';
 
 
 

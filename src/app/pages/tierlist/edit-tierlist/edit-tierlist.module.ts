@@ -5,11 +5,12 @@ import { EditTierlistComponent } from './one-tierlist/components/edit-tierlist.c
 import { SmartAllTierlistComponent } from './all-tierlist/smart/all-tierlist.smart.component';
 import { AllTierlistComponent } from './all-tierlist/components/all-tierlist.component';
 import { NbButtonModule, NbCardModule, NbIconModule, NbInputModule, NbToggleModule } from '@nebular/theme';
+import { TierlistBarComponent } from './one-tierlist/components/tierlist-bar/tierlist-bar.component';
 
 
 
 @NgModule({
-  declarations: [SmartAllTierlistComponent, SmartEditTierlistComponent, EditTierlistComponent, AllTierlistComponent,],
+  declarations: [SmartAllTierlistComponent, SmartEditTierlistComponent, EditTierlistComponent, AllTierlistComponent, TierlistBarComponent,],
   imports: [
     CommonModule,
     NbCardModule,
