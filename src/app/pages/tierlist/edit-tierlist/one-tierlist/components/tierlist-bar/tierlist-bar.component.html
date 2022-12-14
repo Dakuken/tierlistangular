@@ -1,4 +1,4 @@
-<nb-card class="w-1/4  2xl:w-1/5">
+<nb-card class="w-1/4  2xl:w-1/5 h-full">
     <nb-card-header>
         <div class="flex flex-row justify-between pr-5 items-center">
             <div class="flex flex-row items-center">
@@ -16,7 +16,7 @@
     <nb-card-body>
         <div class="flex flex-col">
             <label for="description" class="mb-1 text-lg">Description</label>
-            <input nbInput class="truncate maxWidthInput" type="text" status="primary" placeholder="Description de fou pour la tierlist" [value]="tierlist.description ? tierlist.description : ' sdfs' ">
+            <input nbInput id="description" class="truncate maxWidthInput" type="text" status="primary" placeholder="Description de fou pour la tierlist" [value]="tierlist.description ? tierlist.description : ' sdfs' ">
         </div>
     </nb-card-body>
     <nb-card-footer class="flex flex-col justify-center w-full">

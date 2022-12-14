@@ -7,8 +7,7 @@ import { Tierlist } from 'src/app/interface/tierlist.interface';
   styleUrls: ['./tierlist-bar.component.scss']
 })
 export class TierlistBarComponent implements OnInit {
-
-  @Input() tierlist: Tierlist = { author: ' sdf', description: ' sdfs', isPublic: false, items: [], name: ' sdfds' }
+  @Input() tierlist: Tierlist = { author: ' sdf', description: ' sdf', isPublic: false, items: [], name: ' sdf' }
   @Input() isPublic: boolean = false
   editTitle: boolean = false
   constructor() { }
@@ -27,6 +26,5 @@ export class TierlistBarComponent implements OnInit {
 
   onAddItem(wsh: any) {
     console.log(wsh);
-
   }
 }
