@@ -6,6 +6,9 @@ import { SmartAllTierlistComponent } from './all-tierlist/smart/all-tierlist.sma
 import { AllTierlistComponent } from './all-tierlist/components/all-tierlist.component';
 import { NbButtonModule, NbCardModule, NbIconModule, NbInputModule, NbToggleModule } from '@nebular/theme';
 import { TierlistBarComponent } from './one-tierlist/components/tierlist-bar/tierlist-bar.component';
+import {TierlistItemModule} from "../../../components/tierlist-item/tierlist-item.module";
+import {DragDropModule} from "@angular/cdk/drag-drop";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 
@@ -17,7 +20,11 @@ import { TierlistBarComponent } from './one-tierlist/components/tierlist-bar/tie
     NbButtonModule,
     NbIconModule,
     NbToggleModule,
-    NbInputModule
+    NbInputModule,
+    TierlistItemModule,
+    DragDropModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class EditTierlistModule { }

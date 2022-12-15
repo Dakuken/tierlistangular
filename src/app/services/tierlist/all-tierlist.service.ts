@@ -18,7 +18,12 @@ export class AllTierlistService {
 
   allTierList(userId: string) {
     this.getTierlistService.getAllMyTierlist(userId).then(tierlists => {
+      try {
       this.tierlists = tierlists ? tierlists.sort((a, b) => a.name.localeCompare(b.name)) : []
+      } catch (er){
+        console.log(er)
+        this.tierlists = tierlists
+      }
       this.emitTierlist()
     })
   }

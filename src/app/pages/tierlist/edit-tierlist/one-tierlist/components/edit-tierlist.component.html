@@ -1,3 +1,19 @@
-<div class="w-full flex justify-start px-4 h-full">
-  <app-tierlist-bar class="w-full h-full" [tierlist]="tierlist" [isPublic]="isPublic"></app-tierlist-bar>
+<div class="flex w-full h-full">
+  <div class="w-1/4 flex justify-start px-4 h-full mx-2">
+    <app-tierlist-bar [isPublic]="isPublic" [tierlist]="tierlist" class="w-full h-full"></app-tierlist-bar>
+  </div>
+  <div class="w-3/4"*ngIf="tierlist && tierlist.items">
+        <div cdkDropListGroup class="exemple-container">
+          <div *ngFor="let item of tierlist.items; let i = index" [cdkDropListData]="i" cdkDropList class="restreint">
+            <div class="PASTOUCHE">
+              <div (cdkDragEntered)="dragEntered($event)" (cdkDragReleased)="save()" [cdkDragData]="i" cdkDrag class="example-box">
+                <app-tierlist-item [name]="item.name" [order]="i" [url]="'https://firebasestorage.googleapis.com/v0/b/tierlist-portfolio.appspot.com/o/PORTFOLIO%2Fduck.gif?alt=media&token=167551bc-ebc5-4d7f-be78-11cede9a1840'"></app-tierlist-item>
+  <app-tierlist-item [name]="'pouet'" [order]="1" [url]="'https://firebasestorage.googleapis.com/v0/b/tierlist-portfolio.appspot.com/o/PORTFOLIO%2Fduck.gif?alt=media&token=167551bc-ebc5-4d7f-be78-11cede9a1840'"></app-tierlist-item>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 </div>
+
+

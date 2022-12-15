@@ -23,7 +23,8 @@ export class CreateTierlistService {
       name: data.name,
       author: this.authService.getUID(),
       description: data.description,
-      isPublic: data.private
+      isPublic: data.private,
+      items: []
     });
     return 'ok'
   }

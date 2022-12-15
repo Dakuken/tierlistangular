@@ -1,26 +1,51 @@
-<nb-card class="w-1/4  2xl:w-1/5 h-full">
-    <nb-card-header>
-        <div class="flex flex-row justify-between pr-5 items-center">
-            <div class="flex flex-row items-center">
-                <label for="title" class="flex flex-row items-center cursor-pointer titleHeight">
-                    <nb-icon *ngIf="!editTitle" icon="edit-2-outline" class="text-5xl" (click)="onEditTitle()"></nb-icon>
-                    <p *ngIf="!editTitle" class="w-full text-2xl text-center">{{tierlist.name}}</p>
-                </label>
-                <input id="title" *ngIf="editTitle" type="text" nbInput status="primary" placeholder="Tierlist name" class="w-5/6 titleHeight" [value]="tierlist.name" />
+<nb-card class="h-full">
+
+
+  <nb-card-header>
+    <div class="flex flex-row justify-between pr-5 items-center">
+      <div class="flex flex-row items-center">
+        <label class="flex flex-row items-center cursor-pointer" for="title">
+          <nb-icon (click)="onEditTitle()" *ngIf="!editTitle && tierlist" class="text-5xl" icon="edit-2-outline"></nb-icon>
+          <p *ngIf="!editTitle && tierlist" class="w-full text-2xl text-center">{{tierlist.name}}</p>
+        </label>
+        <input *ngIf="editTitle && tierlist" [value]="tierlist.name" class="w-5/6" id="title" nbInput placeholder="Tierlist name" status="primary" type="text"/>
+      </div>
+      <div class="flex items-center xl:w-1/4 sm:w-1/3 select-none">
+        <nb-toggle (checkedChange)="toggle()" *ngIf="isPublic !== undefined" [checked]="!isPublic" [status]="isPublic ? 'success' : 'danger'">{{isPublic ? 'Public' : ' Privé ' }}</nb-toggle>
+      </div>
+    </div>
+  </nb-card-header>
+
+
+  <nb-card-body>
+    <div class="flex flex-col">
+      <label class="mb-1 text-lg" for="description">Description</label>
+      <textarea *ngIf="tierlist" [value]="tierlist.description ? tierlist.description : '' " fullWidth id="description" nbInput placeholder="Description de fou pour la tierlist" status="primary"></textarea>
+    </div>
+  </nb-card-body>
+
+<!-- TODO : Animation sur la position ou hauteur du flex quand l'érreur s'affiche-->
+  <nb-card-footer>
+    <label class="mb-1 text-lg" for="itemName">Items</label>
+    <form (ngSubmit)="onAddItem()" [formGroup]="itemsForm">
+      <div class="flex flex-col justify-center w-full">
+
+        <div class="flex flex-col w-full">
+        <input id="itemName" [status]="name!.errors ? 'danger' : 'success' " autocomplete="off" class="my-2 inputWidth" formControlName="name" nbInput placeholder="Item Name" required type="text"/>
+          <div *ngIf="name!.invalid && (name!.dirty || name!.touched)" class="alert alert-danger">
+            <div *ngIf="name!.errors?.['required']" class="redError">
+              <p>
+                Il faut un nom... <span class="text-xl">😐</span>
+              </p>
             </div>
-            <div class="flex items-center xl:w-1/4 sm:w-1/3 select-none">
-                <nb-toggle (click)="onPublic()" [checked]="isPublic" [@toggle]="isPublic ? ' public' : 'private'" [status]="isPublic ? 'success' : 'danger'">{{isPublic ? 'Public' : ' Privé ' }}</nb-toggle>
-            </div>
+          </div>
         </div>
-    </nb-card-header>
-    <nb-card-body>
-        <div class="flex flex-col">
-            <label for="description" class="mb-1 text-lg">Description</label>
-            <input nbInput id="description" class="truncate maxWidthInput" type="text" status="primary" placeholder="Description de fou pour la tierlist" [value]="tierlist.description ? tierlist.description : ' sdfs' ">
-        </div>
-    </nb-card-body>
-    <nb-card-footer class="flex flex-col justify-center w-full">
-        <input #inputName nbInput type="text" placeholder="Item name" class="my-2 maxWidthInput" />
-        <button nbButton status="info" (click)="onAddItem(inputName)">Add Item</button>
-    </nb-card-footer>
+
+        <input [status]="url!.errors ? 'danger' : 'success' " autocomplete="off" class="my-2 inputWidth" formControlName="url" nbInput placeholder="Item Url" type="text"/>
+
+
+        <button [disabled]="itemsForm.invalid" class="mt-2 " nbButton status="info" type="submit">Add Item</button>
+      </div>
+    </form>
+  </nb-card-footer>
 </nb-card>

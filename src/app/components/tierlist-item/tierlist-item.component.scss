@@ -1,0 +1,10 @@
+@use '../../../themes' as *;
+
+.cardWidth {
+  min-width: 100px;
+  max-width: 250px;
+}
+
+.backColor{
+background-color: nb-theme(background-basic-color-1)
+}

@@ -31,6 +31,7 @@ import { CreateTierlistService } from './services/tierlist/create-tierlist.servi
 import { EditTierlistService } from './services/tierlist/edit-tierlist.service';
 import { GetTierlistService } from './services/tierlist/get-tierlist.service';
 import { AllTierlistService } from './services/tierlist/all-tierlist.service';
+import {TierlistItemModule} from "./components/tierlist-item/tierlist-item.module";
 
 
 
@@ -53,6 +54,7 @@ import { AllTierlistService } from './services/tierlist/all-tierlist.service';
     HomeModule,
     CreateTierlistModule,
     EditTierlistModule,
+    TierlistItemModule,
 
     NbThemeModule.forRoot({ name: 'dark' }),
     NbDialogModule.forRoot(),

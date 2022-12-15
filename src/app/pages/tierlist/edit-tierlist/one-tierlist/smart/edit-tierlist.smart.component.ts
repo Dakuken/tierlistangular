@@ -30,7 +30,11 @@ export class SmartEditTierlistComponent implements OnInit {
 
     this.tierlistSubscription = this.editTierlistService.tierlistSubject.subscribe(
       (tierlist: Tierlist) => {
+        if(!tierlist) return
         this.tierlist = tierlist
+        if(!this.tierlist.items){
+        this.tierlist.items = []
+        }
         this.isPublic = this.tierlist.isPublic
       }
     );
