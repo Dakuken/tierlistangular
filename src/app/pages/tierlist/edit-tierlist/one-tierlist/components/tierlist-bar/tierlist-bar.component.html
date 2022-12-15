@@ -29,10 +29,9 @@
     <label class="mb-1 text-lg" for="itemName">Items</label>
     <form (ngSubmit)="onAddItem()" [formGroup]="itemsForm">
       <div class="flex flex-col justify-center w-full">
-
-        <div class="flex flex-col w-full">
-        <input id="itemName" [status]="name!.errors ? 'danger' : 'success' " autocomplete="off" class="my-2 inputWidth" formControlName="name" nbInput placeholder="Item Name" required type="text"/>
-          <div *ngIf="name!.invalid && (name!.dirty || name!.touched)" class="alert alert-danger">
+        <div class="flex flex-col w-full justify-start" [@grow]="haveError">
+        <input id="itemName" (keyup)="onContentChange()" [status]="name!.errors ? 'danger' : 'success' " autocomplete="off" class="inputWidth inputHeight" formControlName="name" nbInput placeholder="Item Name" required type="text"/>
+          <div [@errorAnimation] *ngIf="name!.invalid && (name!.dirty || name!.touched)" class="alert alert-danger ml-2">
             <div *ngIf="name!.errors?.['required']" class="redError">
               <p>
                 Il faut un nom... <span class="text-xl">😐</span>
