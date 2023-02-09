@@ -3,7 +3,7 @@ import { Subject } from 'rxjs'
 @Injectable({
   providedIn: 'root'
 })
-export class TierlistNotExistService {
+export class SuccessService {
   exist: boolean = false
   existSubject = new Subject<boolean>()
   message: string =""
@@ -14,13 +14,13 @@ export class TierlistNotExistService {
     this.existSubject.next(this.exist)
   }
 
-  inverse(messageErreur : string) {
-    this.message = messageErreur
+  inverse(message : string, time = 3000) {
+    this.message = message
     this.exist = !this.exist
     this.emitBool()
     setTimeout(() => {
       this.exist = !this.exist
       this.emitBool()
-    }, 3000);
+    }, time);
   }
 }

@@ -6,7 +6,8 @@
   <nb-layout-column class="h-4/5">
     <router-outlet></router-outlet>
     <div class="ban bottom-5 z-20 justify-center flex w-full">
-      <nb-alert @anim status="danger" *ngIf="exist">{{messageErreur}}</nb-alert>
+      <nb-alert @anim status="danger" *ngIf="hasError" (click)="closeError()" class="cursor-pointer absolute">{{messageErreur}}</nb-alert>
+      <nb-alert @anim status="success" *ngIf="hasSuccess" (click)="closeSuccess()" class="cursor-pointer absolute">{{messageSuccess}}</nb-alert>
     </div>
   </nb-layout-column>
 

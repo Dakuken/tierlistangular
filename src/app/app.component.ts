@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { animate, style, transition, trigger } from '@angular/animations';
+import {animate, keyframes, stagger, style, transition, trigger} from '@angular/animations';
 import { Subscription } from 'rxjs';
-import { TierlistNotExistService } from './services/tierlist-not-exist.service';
+import { ErrorService } from './services/error.service';
+import {SuccessService} from "./services/success.service";
 
 @Component({
   selector: 'app-root',
@@ -10,33 +11,55 @@ import { TierlistNotExistService } from './services/tierlist-not-exist.service';
   animations: [
     trigger('anim', [
       transition(':enter', [
-        style({ opacity: 0 }),
-        animate('100ms', style({ opacity: 1 })),
+        style({ bottom : "-100px"  }),
+        animate('200ms',keyframes([
+        style({ bottom : "-100px", offset : 0}),
+        style({ bottom : "0px", offset : 0.3}),
+        style({ bottom : "10px", offset : 0.6  }),
+        style({ bottom : "0px", offset : 1.0  }),
+        ])),
       ]),
       transition(':leave', [
-        animate('100ms', style({ opacity: 0 }))
+        animate('130ms ease-in', style({ bottom : "-100px" }))
       ])
     ])
   ]
 })
 export class AppComponent implements OnInit {
   // app: FirebaseApp
-  existSubscription!: Subscription
-  exist: boolean = false
+  errorSubscription!: Subscription
+  successSubscription!: Subscription
+  hasError: boolean = false
+
+  hasSuccess : boolean = false
 
   messageErreur : string = ""
+  messageSuccess : string = ""
 
-
-  constructor(private existService: TierlistNotExistService) {
+  constructor(private errorService: ErrorService, private successService : SuccessService) {
   }
 
+  closeError(){
+    this.hasError = !this.hasError
+  }
+  closeSuccess(){
+    this.hasSuccess = !this.hasSuccess
+  }
   ngOnInit() {
-    this.existSubscription = this.existService.existSubject.subscribe(
+    this.errorSubscription = this.errorService.existSubject.subscribe(
       (exist: boolean) => {
-        this.exist = exist
-        this.messageErreur = this.existService.message
+        this.hasError = exist
+        this.messageErreur = this.errorService.message
       }
     );
-    this.existService.emitBool()
+    this.errorService.emitBool()
+
+    this.successSubscription = this.successService.existSubject.subscribe(
+      (exist: boolean) => {
+        this.hasSuccess = exist
+        this.messageSuccess = this.successService.message
+      }
+    );
+    this.successService.emitBool()
   }
 }

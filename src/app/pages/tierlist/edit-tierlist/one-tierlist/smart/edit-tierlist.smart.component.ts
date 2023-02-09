@@ -3,9 +3,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {Tierlist} from 'src/app/models/tierlist.model';
 import {AuthService} from 'src/app/services/auth/auth.service';
-import {TierlistNotExistService} from 'src/app/services/tierlist-not-exist.service';
+import {ErrorService} from 'src/app/services/error.service';
 import {EditTierlistService} from 'src/app/services/tierlist/edit-tierlist.service';
 import {SaveTierlistService} from "../../../../../services/tierlist/save-tierlist.service";
+import {SuccessService} from "../../../../../services/success.service";
 
 @Component({
   selector: 'app-smart-edit-tierlist',
@@ -20,7 +21,7 @@ export class SmartEditTierlistComponent implements OnInit {
   messageError: string = ''
   isPublic!: boolean
 
-  constructor(private editTierlistService: EditTierlistService, private authService: AuthService, private route: ActivatedRoute, private router: Router, private existService: TierlistNotExistService, private saveService: SaveTierlistService) {
+  constructor(private editTierlistService: EditTierlistService, private authService: AuthService, private route: ActivatedRoute, private router: Router, private saveService: SaveTierlistService, private errorService: ErrorService, private successService : SuccessService) {
   }
 
   ngOnInit(): void {
@@ -33,7 +34,7 @@ export class SmartEditTierlistComponent implements OnInit {
 
     this.editTierlistService.whichTierlist(tierlistId).then(res => {
         if (!res) {
-          this.existService.inverse("Tu t'es trompé de tierlist mon coco")
+          this.errorService.inverse("Tu t'es trompé de tierlist mon coco")
           this.router.navigate(['/Edit-Tierlist', this.authService.getUID()])
         }
         this.tierlist = res;
@@ -44,41 +45,16 @@ export class SmartEditTierlistComponent implements OnInit {
       }
     )
 
-
-    // this.tierlistSubscription = this.editTierlistService.tierlistSubject.subscribe((tierlist: Tierlist) => {
-    //     if (!tierlist) return
-    //     this.tierlist = tierlist
-    //     if (!this.tierlist.items) {
-    //       this.tierlist.items = []
-    //     }
-    //     this.isPublic = this.tierlist.isPublic
-    //
-    //     console.log(this.tierlist.name)
-    //   }
-    // );
-    //
-    // this.existSubscription = this.existService.existSubject.subscribe(
-    //   (exist: boolean) => {
-    //     this.exist = exist
-    //   }
-    // );
-    // this.existService.emitBool()
-    //
-    //
-    // this.editTierlistService.emitTierlist()
-    // this.editTierlistService.whichTierlist(tierlistId).then(res => {
-    //   if (!res) {
-    //     this.existService.inverse()
-    //     this.router.navigate(['/Edit-Tierlist', this.authService.getUID()])
-    //   }
-    // })
-
   }
 
   async save() {
-    console.log('save')
-    console.log(this.tierlist.name)
     let id = this.authService.getUID()!
-    await this.saveService.saveUserTierlist(`${this.tierlist.name}-${id}`, this.tierlist)
+    await this.saveService.saveUserTierlist(`${this.tierlist.name}-${id}`, this.tierlist).then(res => {
+      if (res === "success") {
+        this.successService.inverse(`Bravo vous avez sauvegarder.`, 2500)
+      }
+    }).catch(err => {
+      this.errorService.inverse(`Désolé il y a eu une erreur, veuillez réssayer ou me contacter. Code erreur : ${err}`, 6000)
+    })
   }
 }

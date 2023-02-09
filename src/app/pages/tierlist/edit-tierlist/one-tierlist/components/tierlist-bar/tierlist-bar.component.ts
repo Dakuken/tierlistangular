@@ -3,8 +3,9 @@ import {Tierlist} from 'src/app/models/tierlist.model';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {animate, animateChild, group, keyframes, query, state, style, transition, trigger} from "@angular/animations";
 import TierlistItem from "../../../../../../models/TierlistItem.model";
-import {SaveTierlistService} from "../../../../../../services/tierlist/save-tierlist.service";
+import {DeleteTierlistService} from "../../../../../../services/tierlist/delete-tierlist.service";
 import {AuthService} from "../../../../../../services/auth/auth.service";
+import {ErrorService} from "../../../../../../services/error.service";
 
 @Component({
   selector: 'app-tierlist-bar',
@@ -12,31 +13,31 @@ import {AuthService} from "../../../../../../services/auth/auth.service";
   styleUrls: ['./tierlist-bar.component.scss'],
   animations: [
     trigger('grow', [
-      state('false', style({height : '50px'})),
-      state('true', style({height : '70px'})),
+      state('false', style({height: '50px'})),
+      state('true', style({height: '70px'})),
       transition('false => true', [
-          style({height: '50px'}),
-          animate('1s ease', style({height : '70px'})),
+        style({height: '50px'}),
+        animate('1s ease', style({height: '70px'})),
         group([query('@errorAnimation', animateChild())])
-        ]),
+      ]),
       transition('true => false', [
-          style({height: '70px'}),
-          animate('1s ease', style({height : '50px'})),
+        style({height: '70px'}),
+        animate('1s ease', style({height: '50px'})),
         group([query('@errorAnimation', animateChild())])
-        ]),
+      ]),
     ]),
 
     //? child
     trigger('errorAnimation', [
       transition(':enter', [
-        style({ opacity: 0 }),
+        style({opacity: 0}),
         animate('2s', keyframes([
-          style({ opacity: 0 , offset : 0.5}),
-          style({ opacity: 1 , offset : 0.7})
+          style({opacity: 0, offset: 0.5}),
+          style({opacity: 1, offset: 0.7})
         ]))
       ]),
       transition(':leave', [
-        animate('0.150s', style({ opacity: 0 }),)
+        animate('0.150s', style({opacity: 0}),)
       ]),
     ]),
   ]
@@ -45,16 +46,18 @@ export class TierlistBarComponent implements OnInit {
   @Input() tierlist: Tierlist = {author: ' sdf', description: ' sdf', isPublic: false, items: [], name: ' sdf'}
   @Input() isPublic!: boolean
 
-  @Output() onSave : EventEmitter<any> = new EventEmitter()
+  @Output() onSave: EventEmitter<any> = new EventEmitter()
   editTitle: boolean = false
   itemName: string = ''
   itemUrl: string = ''
 
   itemsForm!: FormGroup
 
-  haveError : string = 'false'
+  haveError: string = 'false'
 
-  constructor() {
+  tempTitle = ""
+
+  constructor(private deleteTierlistService: DeleteTierlistService, private authService: AuthService, private errorService: ErrorService) {
   }
 
   ngOnInit(): void {
@@ -66,12 +69,11 @@ export class TierlistBarComponent implements OnInit {
 
   onPublic() {
     this.isPublic = !this.isPublic
-    console.log(this.isPublic)
   }
 
 
   get name() {
-    return this.itemsForm.get('name')
+    return this.itemsForm.get('name')?.value
   }
 
   get url() {
@@ -80,28 +82,47 @@ export class TierlistBarComponent implements OnInit {
 
   toggle() {
     this.isPublic = !this.isPublic;
-    console.log(this.isPublic)
   }
 
-  onEditTitle() {
-    if (this.editTitle) return
+
+  changeTitle(title: string) {
+    this.tempTitle = title;
+  }
+
+  changeDescription(description: string) {
+    this.tierlist.description = description;
+  }
+
+
+  async onChangeTitle() {
+    if (this.editTitle) {
+      await this.deleteTierlistService.deleteUserTierlist(`${this.tierlist.name}-${this.authService.getUID()}`).then((res) => {
+        this.tierlist.name = this.tempTitle
+        this.onSave.emit("true")
+        this.editTitle = !this.editTitle
+      }).catch(err => {
+        this.errorService.inverse(`Désolé il y a eu une erreur, veuillez réssayer ou me contacter. Code erreur : ${err}`,6000)
+        return
+      })
+    }
+
+  }
+
+  onEditTitle(){
     this.editTitle = !this.editTitle
   }
-
-
   onAddItem() {
     const name = this.itemsForm.get('name')?.value
     const url = this.itemsForm.get('url')?.value
     let item = new TierlistItem(url, name);
-    console.log(this.tierlist.items)
     this.tierlist.items.push(item)
     this.onSave.emit("true")
   }
 
-  onContentChange(){
-    if(this.name?.errors?.['required']){
+  onContentChange() {
+    if (this.name?.errors?.['required']) {
       this.haveError = "true"
-    }else
+    } else
       this.haveError = "false"
   }
 }

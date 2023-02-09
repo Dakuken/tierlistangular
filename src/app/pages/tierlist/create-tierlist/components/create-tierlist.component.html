@@ -7,9 +7,9 @@
         <input class="m-2" type="text-area" nbInput status="info" placeholder="Description (optional)" formControlName="description">
         <div class="flex items-center justify-between">
           <label for="Radio" class="mx-4">Privée : </label>
-          <nb-radio-group class="flex" name="primary" status="primary" name="Radio" formControlName="private">
-            <nb-radio [value]="true"> oui </nb-radio>
-            <nb-radio [value]="false"> non </nb-radio>
+          <nb-radio-group class="flex" name="primary" status="primary" id="Radio" formControlName="private">
+            <nb-radio [value]="false"> oui </nb-radio>
+            <nb-radio [value]="true"> non </nb-radio>
           </nb-radio-group>
         </div>
         <p style="color : #db2c66">{{errorMessage}}</p>

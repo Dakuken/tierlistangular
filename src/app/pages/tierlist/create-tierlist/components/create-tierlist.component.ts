@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import {DeleteTierlistService} from "../../../../services/tierlist/delete-tierlist.service";
 
 @Component({
   selector: 'app-create-tierlist',
