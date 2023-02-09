@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Tierlist } from 'src/app/interface/tierlist.interface';
+import { Tierlist } from 'src/app/models/tierlist.model';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';

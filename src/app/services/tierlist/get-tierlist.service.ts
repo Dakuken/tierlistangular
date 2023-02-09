@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { onValue, ref } from 'firebase/database';
-import { Subject } from 'rxjs';
-import { Tierlist } from 'src/app/interface/tierlist.interface';
-import { TierlistItem } from 'src/app/interface/tierlistComponent.interface';
+import { Tierlist } from 'src/app/models/tierlist.model';
 import { FireStoreService } from '../fire-store.service';
 
 @Injectable({

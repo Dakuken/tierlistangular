@@ -1,7 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Tierlist} from 'src/app/interface/tierlist.interface';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Tierlist} from 'src/app/models/tierlist.model';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {animate, animateChild, group, keyframes, query, state, style, transition, trigger} from "@angular/animations";
+import TierlistItem from "../../../../../../models/TierlistItem.model";
+import {SaveTierlistService} from "../../../../../../services/tierlist/save-tierlist.service";
+import {AuthService} from "../../../../../../services/auth/auth.service";
 
 @Component({
   selector: 'app-tierlist-bar',
@@ -41,6 +44,8 @@ import {animate, animateChild, group, keyframes, query, state, style, transition
 export class TierlistBarComponent implements OnInit {
   @Input() tierlist: Tierlist = {author: ' sdf', description: ' sdf', isPublic: false, items: [], name: ' sdf'}
   @Input() isPublic!: boolean
+
+  @Output() onSave : EventEmitter<any> = new EventEmitter()
   editTitle: boolean = false
   itemName: string = ''
   itemUrl: string = ''
@@ -83,10 +88,14 @@ export class TierlistBarComponent implements OnInit {
     this.editTitle = !this.editTitle
   }
 
+
   onAddItem() {
     const name = this.itemsForm.get('name')?.value
     const url = this.itemsForm.get('url')?.value
-    console.log(name, url)
+    let item = new TierlistItem(url, name);
+    console.log(this.tierlist.items)
+    this.tierlist.items.push(item)
+    this.onSave.emit("true")
   }
 
   onContentChange(){

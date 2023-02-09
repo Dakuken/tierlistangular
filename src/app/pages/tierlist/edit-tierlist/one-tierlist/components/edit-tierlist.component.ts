@@ -1,6 +1,5 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, Input, OnInit } from '@angular/core';
-import { Tierlist } from 'src/app/interface/tierlist.interface';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Tierlist} from 'src/app/models/tierlist.model';
 import {CdkDragEnter, moveItemInArray} from "@angular/cdk/drag-drop";
 
 @Component({
@@ -9,18 +8,16 @@ import {CdkDragEnter, moveItemInArray} from "@angular/cdk/drag-drop";
   styleUrls: ['./edit-tierlist.component.scss']
 })
 export class EditTierlistComponent implements OnInit {
-  @Input() tierlist: Tierlist = { author: ' sdf', description: ' sdf', isPublic: false, items: [], name: ' sdfds' }
+  @Input() tierlist!: Tierlist
   @Input() isPublic!: boolean
+
+  @Output() onSave: EventEmitter<any> = new EventEmitter()
   editTitle: boolean = false
-  constructor() { }
-  ngOnInit(): void {
+
+  constructor() {
   }
 
-  save() {
-    console.log('save')
-    // setTimeout(() => {
-    //   this.saveProfService.writeUserTierlis(this.authService.getUID()!)
-    // }, 500);
+  ngOnInit(): void {
   }
 
 
@@ -30,6 +27,13 @@ export class EditTierlistComponent implements OnInit {
     const dragIndex = drag.data;
     const dropIndex = dropList.data;
     moveItemInArray(this.tierlist.items, dragIndex, dropIndex);
+  }
+
+  onSaveEmit() {
+    setTimeout(
+      () => {
+        this.onSave.emit("true")
+      }, 500)
   }
 
 }

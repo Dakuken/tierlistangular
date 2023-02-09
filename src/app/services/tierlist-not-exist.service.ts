@@ -6,13 +6,16 @@ import { Subject } from 'rxjs'
 export class TierlistNotExistService {
   exist: boolean = false
   existSubject = new Subject<boolean>()
+  message: string =""
+
   constructor() { }
 
   emitBool() {
     this.existSubject.next(this.exist)
   }
 
-  inverse() {
+  inverse(messageErreur : string) {
+    this.message = messageErreur
     this.exist = !this.exist
     this.emitBool()
     setTimeout(() => {

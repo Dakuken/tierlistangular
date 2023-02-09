@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Tierlist } from 'src/app/interface/tierlist.interface';
+import { Tierlist } from 'src/app/models/tierlist.model';
 
 @Component({
   selector: 'app-all-tierlist',

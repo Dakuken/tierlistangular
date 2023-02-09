@@ -23,6 +23,10 @@ export class AppComponent implements OnInit {
   // app: FirebaseApp
   existSubscription!: Subscription
   exist: boolean = false
+
+  messageErreur : string = ""
+
+
   constructor(private existService: TierlistNotExistService) {
   }
 
@@ -30,9 +34,9 @@ export class AppComponent implements OnInit {
     this.existSubscription = this.existService.existSubject.subscribe(
       (exist: boolean) => {
         this.exist = exist
+        this.messageErreur = this.existService.message
       }
     );
     this.existService.emitBool()
-
   }
 }

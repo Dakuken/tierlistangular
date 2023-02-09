@@ -6,7 +6,7 @@
   <nb-layout-column class="h-4/5">
     <router-outlet></router-outlet>
     <div class="ban bottom-5 z-20 justify-center flex w-full">
-      <nb-alert @anim status="danger" *ngIf="exist">Vous avez été expulsé de la partie</nb-alert>
+      <nb-alert @anim status="danger" *ngIf="exist">{{messageErreur}}</nb-alert>
     </div>
   </nb-layout-column>
 

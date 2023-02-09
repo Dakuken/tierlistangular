@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Tierlist } from 'src/app/interface/tierlist.interface';
+import { Tierlist } from 'src/app/models/tierlist.model';
 import { GetTierlistService } from './get-tierlist.service';
 import { Subject } from 'rxjs'
 @Injectable({
