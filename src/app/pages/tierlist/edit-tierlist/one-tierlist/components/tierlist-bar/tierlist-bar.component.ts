@@ -82,6 +82,7 @@ export class TierlistBarComponent implements OnInit {
 
   toggle() {
     this.isPublic = !this.isPublic;
+    this.tierlist.isPublic = this.isPublic
   }
 
 

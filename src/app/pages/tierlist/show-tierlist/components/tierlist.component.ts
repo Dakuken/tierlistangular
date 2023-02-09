@@ -6,6 +6,7 @@ import { Prof } from 'src/app/interface/Prof.interface';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { GetProfService } from 'src/app/services/profService/get-prof.service';
 import { SaveProfService } from 'src/app/services/profService/save-prof.service';
+import {Title} from "@angular/platform-browser";
 @Component({
   selector: 'app-tierlist',
   templateUrl: './tierlist.component.html',
@@ -16,7 +17,9 @@ export class TierlistComponent implements OnInit {
   profsSubscription!: Subscription
   messageError: string = ''
 
-  constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService, private getProf: GetProfService, private saveProfService: SaveProfService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService, private getProf: GetProfService, private saveProfService: SaveProfService, private titleService : Title) {
+      this.titleService.setTitle("Tierlists que vous avez fait")
+  }
 
   ngOnInit(): void {
     const userId = this.authService.getUID()

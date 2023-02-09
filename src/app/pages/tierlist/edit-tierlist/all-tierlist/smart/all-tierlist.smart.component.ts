@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AllTierlistService } from 'src/app/services/tierlist/all-tierlist.service';
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-smart-all-tierlist',
@@ -15,7 +16,9 @@ export class SmartAllTierlistComponent implements OnInit {
   tierlistSubscription!: Subscription
   messageError: string = ''
 
-  constructor(private alltierlistService: AllTierlistService, private authService: AuthService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private alltierlistService: AllTierlistService, private authService: AuthService, private route: ActivatedRoute, private router: Router, private titleService : Title) {
+    this.titleService.setTitle('Edit your Tierlist')
+  }
 
   ngOnInit(): void {
     const userId = this.authService.getUID()

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
-import { NbUserModule } from '@nebular/theme';
+import {NbButtonModule, NbCardModule, NbIconModule, NbUserModule} from '@nebular/theme';
 import { LoaderModule } from '../../components/loader/loader.module';
 
 
@@ -14,7 +14,10 @@ import { LoaderModule } from '../../components/loader/loader.module';
   imports: [
     CommonModule,
     NbUserModule,
-    LoaderModule
+    LoaderModule,
+    NbCardModule,
+    NbIconModule,
+    NbButtonModule
   ]
 })
 export class HomeModule { }

@@ -7,6 +7,7 @@ import {ErrorService} from 'src/app/services/error.service';
 import {EditTierlistService} from 'src/app/services/tierlist/edit-tierlist.service';
 import {SaveTierlistService} from "../../../../../services/tierlist/save-tierlist.service";
 import {SuccessService} from "../../../../../services/success.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-smart-edit-tierlist',
@@ -21,7 +22,8 @@ export class SmartEditTierlistComponent implements OnInit {
   messageError: string = ''
   isPublic!: boolean
 
-  constructor(private editTierlistService: EditTierlistService, private authService: AuthService, private route: ActivatedRoute, private router: Router, private saveService: SaveTierlistService, private errorService: ErrorService, private successService : SuccessService) {
+  constructor(private editTierlistService: EditTierlistService, private authService: AuthService, private route: ActivatedRoute, private router: Router, private saveService: SaveTierlistService, private errorService: ErrorService, private successService : SuccessService, private  titleService : Title) {
+    this.titleService.setTitle('Edit one of your Tierlist')
   }
 
   ngOnInit(): void {

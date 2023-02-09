@@ -1,15 +1,15 @@
 <div class="grid" *ngIf="!mobile">
   <div class="colored-column-warning">
-    <button *ngIf="this.isAuth" nbButton outline status="info" (click)="goTo('/home')">Home</button>
-    <button *ngIf="this.isAuth" nbButton outline status="info" (click)="onViewTierlistPerso()">My Tierlist</button>
-    <button *ngIf="this.isAuth" nbButton outline status="info" (click)="goTo('/CreateTierlList')">Create Tierlist</button>
-    <button *ngIf="this.isAuth" nbButton outline status="info" (click)="editTierlist()">Edit Tierlist</button>
+    <button *ngIf="this.isAuth" nbButton outline status="info" (click)="goTo('/home')">Tierlist Publique</button>
+    <button *ngIf="this.isAuth" nbButton outline status="info" (click)="goTo('/CreateTierlList')">Créer une tierlist</button>
+    <button *ngIf="this.isAuth" nbButton outline status="info" (click)="editTierlist()">Modifier une tierlist</button>
+    <button *ngIf="this.isAuth" nbButton outline status="info" (click)="onViewTierlistPerso()">Vos tierlists</button>
   </div>
 
   <div>
-    <button *ngIf="!this.isAuth" nbButton outline status="success" class="right" (click)="goTo('/auth/signin')">Sign In</button>
-    <button *ngIf=" !this.isAuth" nbButton outline status="success" class="right" (click)="goTo('/auth/signup')">Sign up</button>
-    <button *ngIf=" this.isAuth" nbButton outline status="danger" style="opacity : 0.9" class="right" (click)="onSignOut()">Log out</button>
+    <button *ngIf="!this.isAuth" nbButton outline status="success" class="right" (click)="goTo('/auth/signin')">Se connecter</button>
+    <button *ngIf=" !this.isAuth" nbButton outline status="success" class="right" (click)="goTo('/auth/signup')">S'inscrire</button>
+    <button *ngIf=" this.isAuth" nbButton outline status="danger" style="opacity : 0.9" class="right" (click)="onSignOut()">Deconnexion</button>
   </div>
 </div>
 

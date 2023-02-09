@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CreateTierlistService } from 'src/app/services/tierlist/create-tierlist.service';
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-create-tierlist.smart',
@@ -12,7 +13,9 @@ export class SmartCreateTierlist implements OnInit {
   signUpForm!: FormGroup;
   errorMessage: string = ''
 
-  constructor(private formBuilder: FormBuilder, private createTierlistService: CreateTierlistService, private router: Router, private authService: AuthService) { }
+  constructor(private formBuilder: FormBuilder, private createTierlistService: CreateTierlistService, private router: Router, private authService: AuthService,private  titleService : Title) {
+    this.titleService.setTitle('Create Tierlist')
+  }
 
   ngOnInit(): void {
     this.initForm()
