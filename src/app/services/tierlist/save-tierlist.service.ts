@@ -8,8 +8,7 @@ import {Tierlist} from "../../models/tierlist.model";
 })
 export class SaveTierlistService {
 
-  constructor(private fireStoreService: FireStoreService) {
-  }
+  constructor(private fireStoreService: FireStoreService) {}
 
   async saveUserTierlist(tierlistName: string, tierlist: Tierlist) {
     return new Promise((res, rej) => {
@@ -22,7 +21,6 @@ export class SaveTierlistService {
       })
         .then(() => res("success"))
         .catch(error => rej(error))
-
     })
 
   }
