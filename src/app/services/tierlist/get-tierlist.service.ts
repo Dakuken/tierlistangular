@@ -12,10 +12,15 @@ export class GetTierlistService {
 
 
 
-  getOneTierlist(path: string): Promise<Tierlist> {
+  async getOneTierlist(path: string): Promise<Tierlist> {
     return new Promise((res, rej) => {
-      onValue(ref(this.fireStoreService.db, `/tierlist/${path}`), (tierlist) => {
+      onValue(ref(this.fireStoreService.db, `/tierlist/${path}/`), (tierlist) => {
+        console.log(tierlist.val(), tierlist.exists())
+        if(tierlist.exists()){
         res(tierlist.val())
+        }else {
+         rej('pasok')
+        }
       }, {
         onlyOnce: true
       });

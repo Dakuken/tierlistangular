@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {TierlistItemComponent} from "./tierlist-item.component";
-import {NbIconModule, NbUserModule} from '@nebular/theme';
+import {NbButtonModule, NbCardModule, NbIconModule, NbInputModule, NbUserModule} from '@nebular/theme';
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -9,7 +10,11 @@ import {NbIconModule, NbUserModule} from '@nebular/theme';
   imports: [
     CommonModule,
     NbUserModule,
-    NbIconModule
+    NbIconModule,
+    NbCardModule,
+    NbInputModule,
+    ReactiveFormsModule,
+    NbButtonModule
   ],
   exports : [TierlistItemComponent]
 })

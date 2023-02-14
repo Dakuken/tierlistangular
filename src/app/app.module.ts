@@ -14,7 +14,7 @@ import { UsersService } from './services/users.service';
 import { CanDeactivateGuard } from './services/auth/can-deactivate-guard.service';
 
 //nebular module
-import { NbThemeModule, NbLayoutModule, NbMenuModule, NbButtonModule, NbDialogModule, NbIconModule, NbContextMenuModule, NbAlertModule } from '@nebular/theme';
+import {NbThemeModule, NbLayoutModule, NbMenuModule, NbButtonModule, NbDialogModule, NbIconModule, NbContextMenuModule, NbAlertModule, NbCardModule, NbInputModule} from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 // my module
@@ -32,6 +32,8 @@ import { EditTierlistService } from './services/tierlist/edit-tierlist.service';
 import { GetTierlistService } from './services/tierlist/get-tierlist.service';
 import { AllTierlistService } from './services/tierlist/all-tierlist.service';
 import {TierlistItemModule} from "./components/tierlist-item/tierlist-item.module";
+import { EditableTierlistItemComponent } from './components/editable-tierlist-item/editable-tierlist-item.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 
@@ -56,7 +58,7 @@ import {TierlistItemModule} from "./components/tierlist-item/tierlist-item.modul
     EditTierlistModule,
     TierlistItemModule,
 
-    NbThemeModule.forRoot({ name: 'dark' }),
+    NbThemeModule.forRoot({name: 'dark'}),
     NbDialogModule.forRoot(),
     NbMenuModule.forRoot(),
     NbContextMenuModule,
@@ -64,7 +66,10 @@ import {TierlistItemModule} from "./components/tierlist-item/tierlist-item.modul
     NbLayoutModule,
     NbIconModule,
     NbEvaIconsModule,
-    NbAlertModule
+    NbAlertModule,
+    ReactiveFormsModule,
+    NbCardModule,
+    NbInputModule
 
   ],
   providers: [AuthService, AuthGuardService, UsersService, CanDeactivateGuard, FireStoreService, GetProfService, SaveProfService, CreateTierlistService, EditTierlistService, GetTierlistService, AllTierlistService],

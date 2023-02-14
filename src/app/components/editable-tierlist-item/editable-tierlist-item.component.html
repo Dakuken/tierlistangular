@@ -1,0 +1,23 @@
+
+  <div class="modal">
+    <nb-card class="h-52">
+      <nb-card-body class="flex flex-col justify-between items-center">
+        <form (ngSubmit)="onEditItem()" [formGroup]="itemsForm">
+          <div class="flex flex-col justify-center w-full">
+            <div [@grow]="haveError" class="flex flex-col w-full justify-start">
+              <input (keyup)="onContentChange()" [status]="nameEdited!.errors ? 'danger' : 'success' " autocomplete="off" class="inputWidth inputHeight" formControlName="name" id="itemName" nbInput placeholder="Item Name" required type="text"/>
+              <div *ngIf="nameEdited!.invalid && (nameEdited!.dirty || nameEdited!.touched)" [@errorAnimation] class="alert alert-danger ml-2">
+                <div *ngIf="nameEdited!.errors?.['required']" class="redError">
+                  <p>
+                    Il faut un nom... <span class="text-xl">😐</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <input [status]="urlEdited!.errors ? 'danger' : 'success' " autocomplete="off" class="my-2 inputWidth" formControlName="url" nbInput placeholder="Item Url" type="text"/>
+            <button [disabled]="itemsForm.invalid" class="mt-2 " nbButton status="info" type="submit">Edit Item</button>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>

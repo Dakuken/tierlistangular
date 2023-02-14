@@ -31,4 +31,8 @@ export class HomeComponent implements OnInit {
       this.errorService.inverse(`Désolé il y a eu une erreur, veuillez réssayer ou me contacter. Code erreur : ${error}`, 6000)
     })
   }
+  getAuthor(){
+
+  }
+
 }

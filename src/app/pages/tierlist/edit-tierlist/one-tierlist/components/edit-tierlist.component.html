@@ -1,23 +1,23 @@
 <div class="flex w-full h-full">
   <div class="w-1/4 flex justify-start px-4 h-full mx-2">
-    <app-tierlist-bar (onSave)="onSaveEmit()" [isPublic]="isPublic" [tierlist]="tierlist" class="w-full h-3/4"></app-tierlist-bar>
+    <app-tierlist-bar (onSave)="onSaveEmit()" (emitNewItem)="onAddNewItem($event)" [isPublic]="isPublic" [tierlist]="tierlist" class="w-full h-3/4"></app-tierlist-bar>
   </div>
   <div *ngIf="tierlist && tierlist.items">
-    <div cdkDropListGroup class="exemple-container flex flex-col flex-wrap" style="max-height: 600px;">
+    <div *ngIf="!oneItemIsEdited" cdkDropListGroup class="exemple-container flex flex-col flex-wrap" style="max-height: 600px;">
       <div *ngFor="let item of tierlist.items; let i = index" [cdkDropListData]="i" cdkDropList class="restreint mx-4">
         <div class="PASTOUCHE">
-          <div (cdkDragEntered)="dragEntered($event)"  [cdkDragData]="i" cdkDrag class="example-box">
-            <app-tierlist-item [name]="item.name" [order]="i" [url]="item.url" [canDelete]="true"></app-tierlist-item>
-
+          <div (cdkDragEntered)="dragEntered($event)" [cdkDragData]="i" cdkDrag class="example-box">
+            <app-tierlist-item (deleteItemEmit)="onDeleteItem(i)" (onEditedItem)="onItemEdited($event,i)" [canEdit]="true" [name]="item.name" [order]="i" [url]="item.url"></app-tierlist-item>
           </div>
         </div>
       </div>
     </div>
+    <app-editable-tierlist-item (onSave)="oneItemIsEditedFinish($event)" *ngIf="oneItemIsEdited"></app-editable-tierlist-item>
   </div>
 </div>
 <div class="relative ">
   <div class="absolute inset-0 flex justify-center h-12">
-  <button nbButton outline status="info" (click)="onSaveEmit()">Save my tierlist</button>
+    <button (click)="onSaveEmit()" nbButton outline status="info">Save my tierlist</button>
   </div>
 </div>
 

@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendEmailVerification } from "firebase/auth";
-import { doc, getFirestore, setDoc } from 'firebase/firestore';
-import { User } from '../../models/User.model';
-import { FireStoreService } from '../fire-store.service';
+import {Injectable} from '@angular/core';
+import {createUserWithEmailAndPassword, getAuth, sendEmailVerification, signInWithEmailAndPassword, signOut} from "firebase/auth";
+import {doc, getFirestore, setDoc} from 'firebase/firestore';
+import {FireStoreService} from '../fire-store.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,18 +9,17 @@ import { FireStoreService } from '../fire-store.service';
 export class AuthService {
 
 
-  constructor(private FireStoreService: FireStoreService) { }
+  constructor(private FireStoreService: FireStoreService) {}
 
-  createNewUser(userMoi: User, password: string) {
+  createNewUser(email: string, password: string, pseudo: string) {
     const auth = getAuth();
     // const userService = new UsersService(user)
     return new Promise<void>(
       (resolve, reject) => {
-        createUserWithEmailAndPassword(auth, userMoi.email, password)
+        createUserWithEmailAndPassword(auth, email, password)
           .then(
             (userCredential) => {
-              this.SaveNewUserFireStore(userMoi)
-              const user = userCredential.user;
+              this.SaveNewUserFireStore(email, pseudo).then().catch()
               resolve()
             },
             (error: Error) => {
@@ -32,34 +30,13 @@ export class AuthService {
     )
   }
 
-  async SaveNewUserFireStore(user: User) {
+  async SaveNewUserFireStore(email: string, pseudo: string) {
     const auth = getAuth()
-    user.id = auth.currentUser?.uid
     const db = getFirestore(this.FireStoreService.app);
     const id = String(auth.currentUser?.uid)
+    let user = {pseudo, id, email}
     await setDoc(doc(db, "users", id), Object.assign({}, user));
   }
-
-  sendSignInLinkToEmail(email: string) {
-    const auth = getAuth();
-    var actionCodeSettings = {
-      url: 'https://final-angular.netlify.app/?email=' + auth.currentUser?.email,
-      handleCodeInApp: true,
-      // When multiple custom dynamic link domains are defined, specify which
-      // one to use.
-      dynamicLinkDomain: "example.page.link"
-    };
-    sendEmailVerification(auth.currentUser!).then(() => {
-      console.log("email sent");
-    }).catch((error: Error) => {
-      console.log('An error happened' + error);
-    });
-  }
-
-  // Dynamic Links will start with https://prostix.fr/xyz
-  // "appAssociation": "AUTO",
-  // "rewrites": [{ "source": "/xyz/**", "dynamicLinks": true }]
-  //google-site-verification=xwPDowz8YyFrSZuoTqWylQXtArbZmVutZzZ7wnPSC2c
 
   signInUser(email: string, password: string) {
     const auth = getAuth()

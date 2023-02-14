@@ -9,22 +9,24 @@ import { TierlistBarComponent } from './one-tierlist/components/tierlist-bar/tie
 import {TierlistItemModule} from "../../../components/tierlist-item/tierlist-item.module";
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {EditableTierlistItemModule} from "../../../components/editable-tierlist-item/editable-tierlist-item.module";
 
 
 
 @NgModule({
   declarations: [SmartAllTierlistComponent, SmartEditTierlistComponent, EditTierlistComponent, AllTierlistComponent, TierlistBarComponent,],
-  imports: [
-    CommonModule,
-    NbCardModule,
-    NbButtonModule,
-    NbIconModule,
-    NbToggleModule,
-    NbInputModule,
-    TierlistItemModule,
-    DragDropModule,
-    ReactiveFormsModule,
-    FormsModule
-  ]
+    imports: [
+        CommonModule,
+        NbCardModule,
+        NbButtonModule,
+        NbIconModule,
+        NbToggleModule,
+        NbInputModule,
+        TierlistItemModule,
+        DragDropModule,
+        ReactiveFormsModule,
+        FormsModule,
+        EditableTierlistItemModule
+    ]
 })
 export class EditTierlistModule { }

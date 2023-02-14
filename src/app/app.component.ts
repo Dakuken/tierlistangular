@@ -46,6 +46,7 @@ export class AppComponent implements OnInit {
     this.hasSuccess = !this.hasSuccess
   }
   ngOnInit() {
+
     this.errorSubscription = this.errorService.existSubject.subscribe(
       (exist: boolean) => {
         this.hasError = exist

@@ -8,11 +8,20 @@ import {EditTierlistService} from 'src/app/services/tierlist/edit-tierlist.servi
 import {SaveTierlistService} from "../../../../../services/tierlist/save-tierlist.service";
 import {SuccessService} from "../../../../../services/success.service";
 import {Title} from "@angular/platform-browser";
+import TierlistItem from "../../../../../models/TierlistItem.model";
 
 @Component({
   selector: 'app-smart-edit-tierlist',
   template: `
-    <app-edit-tierlist [tierlist]="tierlist" [isPublic]="isPublic" (onSave)="save()"></app-edit-tierlist>`,
+      <app-edit-tierlist
+              (EditItem)="onEditItem($event)"
+              (deleteItem)="onDeleteItem($event)"
+              (onSave)="save()"
+              [isPublic]="isPublic"
+              [tierlist]="tierlist"
+                (emitNewItem)="onAddItem($event)"
+      >
+      </app-edit-tierlist>`,
 })
 export class SmartEditTierlistComponent implements OnInit {
   tierlist!: Tierlist
@@ -22,7 +31,7 @@ export class SmartEditTierlistComponent implements OnInit {
   messageError: string = ''
   isPublic!: boolean
 
-  constructor(private editTierlistService: EditTierlistService, private authService: AuthService, private route: ActivatedRoute, private router: Router, private saveService: SaveTierlistService, private errorService: ErrorService, private successService : SuccessService, private  titleService : Title) {
+  constructor(private editTierlistService: EditTierlistService, private authService: AuthService, private route: ActivatedRoute, private router: Router, private saveService: SaveTierlistService, private errorService: ErrorService, private successService: SuccessService, private titleService: Title) {
     this.titleService.setTitle('Edit one of your Tierlist')
   }
 
@@ -49,14 +58,36 @@ export class SmartEditTierlistComponent implements OnInit {
 
   }
 
-  async save() {
+  async save(tierlistTemp?: Tierlist) {
+    let tierlist = tierlistTemp ? tierlistTemp : this.tierlist
     let id = this.authService.getUID()!
-    await this.saveService.saveUserTierlist(`${this.tierlist.name}-${id}`, this.tierlist).then(res => {
+    await this.saveService.saveUserTierlist(`${this.tierlist.name}-${id}`, tierlist).then(res => {
       if (res === "success") {
         this.successService.inverse(`Bravo vous avez sauvegarder.`, 2500)
+        this.tierlist = tierlist
       }
     }).catch(err => {
       this.errorService.inverse(`Désolé il y a eu une erreur, veuillez réssayer ou me contacter. Code erreur : ${err}`, 6000)
     })
+  }
+
+
+  async onDeleteItem(item: number) {
+    let t1 = JSON.parse(JSON.stringify(this.tierlist));
+    t1.items.splice(item, 1);
+    await this.save(t1);
+  }
+
+  async onEditItem(info : [TierlistItem, number]){
+    let t1 = JSON.parse(JSON.stringify(this.tierlist));
+    let obj = {name : info[0].name, url : info[0].url};
+    t1.items.splice(info[1], 1, obj);
+    await this.save(t1);
+  }
+
+ async onAddItem(tierlistItem : TierlistItem){
+    let t1 = JSON.parse(JSON.stringify(this.tierlist));
+    t1.items.push(tierlistItem);
+    await this.save(t1);
   }
 }

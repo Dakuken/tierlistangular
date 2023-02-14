@@ -47,6 +47,8 @@ export class TierlistBarComponent implements OnInit {
   @Input() isPublic!: boolean
 
   @Output() onSave: EventEmitter<any> = new EventEmitter()
+
+  @Output() emitNewItem : EventEmitter<TierlistItem> = new EventEmitter();
   editTitle: boolean = false
   itemName: string = ''
   itemUrl: string = ''
@@ -96,7 +98,8 @@ export class TierlistBarComponent implements OnInit {
 
 
   async onChangeTitle() {
-    if (this.editTitle) {
+    if (this.editTitle && this.tempTitle && this.tempTitle.length >= 3) {
+      console.log('a,nzlomg negijoungi nhjg')
       await this.deleteTierlistService.deleteUserTierlist(`${this.tierlist.name}-${this.authService.getUID()}`).then((res) => {
         this.tierlist.name = this.tempTitle
         this.onSave.emit("true")
@@ -105,19 +108,21 @@ export class TierlistBarComponent implements OnInit {
         this.errorService.inverse(`Désolé il y a eu une erreur, veuillez réssayer ou me contacter. Code erreur : ${err}`,6000)
         return
       })
+    }else {
+      this.errorService.inverse(`Désolé, il faut un nom du plus de 3 lettres 😉.`,1000)
     }
 
   }
 
   onEditTitle(){
     this.editTitle = !this.editTitle
+    this.tempTitle = this.tierlist.name
   }
   onAddItem() {
     const name = this.itemsForm.get('name')?.value
     const url = this.itemsForm.get('url')?.value
     let item = new TierlistItem(url, name);
-    this.tierlist.items.push(item)
-    this.onSave.emit("true")
+    this.emitNewItem.emit(item)
   }
 
   onContentChange() {
