@@ -1,0 +1,13 @@
+<div class="modal">
+  <nb-card class="h-52">
+    <nb-card-body class="flex flex-col justify-between items-center">
+      <form (ngSubmit)="onEditUser()" [formGroup]="userForm">
+        <div *ngIf="isReady" class="flex flex-col justify-center w-full">
+          <input  [value]="userEmail" autocomplete="off" class="inputWidth inputHeight" formControlName="email" id="itemName" nbInput placeholder="Email" required type="text"/>
+          <input   [value]="userPseudo" autocomplete="off" class="my-2 inputWidth" formControlName="pseudo" nbInput placeholder="Pseudo" type="text"/>
+          <button  class="mt-2 " nbButton status="info" type="submit">Appliquer les changements</button>
+        </div>
+      </form>
+    </nb-card-body>
+  </nb-card>
+</div>

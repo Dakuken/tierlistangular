@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {createUserWithEmailAndPassword, getAuth, sendEmailVerification, signInWithEmailAndPassword, signOut} from "firebase/auth";
 import {doc, getFirestore, setDoc} from 'firebase/firestore';
 import {FireStoreService} from '../fire-store.service';
+import {ref, set} from "firebase/database";
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import {FireStoreService} from '../fire-store.service';
 export class AuthService {
 
 
-  constructor(private FireStoreService: FireStoreService) {}
+  constructor(private fireStoreService: FireStoreService) {}
 
   createNewUser(email: string, password: string, pseudo: string) {
     const auth = getAuth();
@@ -32,10 +33,15 @@ export class AuthService {
 
   async SaveNewUserFireStore(email: string, pseudo: string) {
     const auth = getAuth()
-    const db = getFirestore(this.FireStoreService.app);
     const id = String(auth.currentUser?.uid)
-    let user = {pseudo, id, email}
-    await setDoc(doc(db, "users", id), Object.assign({}, user));
+    return new Promise((res, rej) => {
+      set(ref(this.fireStoreService.db, `/users/${id}`), {
+        pseudo : pseudo,
+        email : email
+      })
+        .then(() => res("success"))
+        .catch(error => rej(error))
+    })
   }
 
   signInUser(email: string, password: string) {

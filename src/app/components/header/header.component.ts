@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { getAuth } from '@firebase/auth';
-import { NbMenuService } from '@nebular/theme';
-import { AuthService } from '../../services/auth/auth.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {getAuth} from '@firebase/auth';
+import {NbMenuService} from '@nebular/theme';
+import {AuthService} from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -47,6 +47,7 @@ export class HeaderComponent implements OnInit {
     }
   ]
 
+  showUserSetting = false
   constructor(menu: NbMenuService, private router: Router, private authService: AuthService) {
     menu.onItemClick().subscribe((data) => {
       const item = data.item as any;
@@ -88,6 +89,15 @@ export class HeaderComponent implements OnInit {
 
   onViewTierlistPerso() {
     this.router.navigate(['/tierlist/' + this.authService.getUID()])
+  }
+
+  onShowUserSettings(){
+    this.showUserSetting = !this.showUserSetting
+  }
+
+  isVisible() {
+    let visi = (this.showUserSetting)?' visible' : ' hidden'
+    return `visibility : ${visi} ;`
   }
 
 }

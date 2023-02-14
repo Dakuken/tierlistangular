@@ -34,6 +34,8 @@ import { AllTierlistService } from './services/tierlist/all-tierlist.service';
 import {TierlistItemModule} from "./components/tierlist-item/tierlist-item.module";
 import { EditableTierlistItemComponent } from './components/editable-tierlist-item/editable-tierlist-item.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import { ModalUserComponent } from './components/modal-user/modal-user.component';
+import {ModalUserModule} from "./components/modal-user/modal-user.module";
 
 
 
@@ -57,6 +59,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     CreateTierlistModule,
     EditTierlistModule,
     TierlistItemModule,
+    ModalUserModule,
 
     NbThemeModule.forRoot({name: 'dark'}),
     NbDialogModule.forRoot(),

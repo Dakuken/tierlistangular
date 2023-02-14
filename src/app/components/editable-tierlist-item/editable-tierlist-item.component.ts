@@ -39,9 +39,9 @@ import {animate, animateChild, group, keyframes, query, state, style, transition
   ]
 })
 export class EditableTierlistItemComponent implements OnInit {
-  itemsForm!: FormGroup
   @Output() onSave : EventEmitter<TierlistItem> = new EventEmitter()
 
+  itemsForm!: FormGroup
   itemName: string = ''
   itemUrl: string = ''
   haveError: string = 'false'

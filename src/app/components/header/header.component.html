@@ -1,22 +1,26 @@
-<div class="grid" *ngIf="!mobile">
+<div *ngIf="!mobile" class="grid">
   <div class="colored-column-warning">
-    <button *ngIf="this.isAuth" nbButton outline status="info" (click)="goTo('/home')">Tierlist Publique</button>
-    <button *ngIf="this.isAuth" nbButton outline status="info" (click)="goTo('/CreateTierlList')">Créer une tierlist</button>
-    <button *ngIf="this.isAuth" nbButton outline status="info" (click)="editTierlist()">Modifier une tierlist</button>
-    <button *ngIf="this.isAuth" nbButton outline status="info" (click)="onViewTierlistPerso()">Vos tierlists</button>
+    <button (click)="goTo('/home')" *ngIf="this.isAuth" nbButton outline status="info">Tierlist Publique</button>
+    <button (click)="goTo('/CreateTierlList')" *ngIf="this.isAuth" nbButton outline status="info">Créer une tierlist</button>
+    <button (click)="editTierlist()" *ngIf="this.isAuth" nbButton outline status="info">Modifier une tierlist</button>
+    <button (click)="onViewTierlistPerso()" *ngIf="this.isAuth" nbButton outline status="info">Tierlist Effectuées</button>
   </div>
 
-  <div>
-    <button *ngIf="!this.isAuth" nbButton outline status="success" class="right" (click)="goTo('/auth/signin')">Se connecter</button>
-    <button *ngIf=" !this.isAuth" nbButton outline status="success" class="right" (click)="goTo('/auth/signup')">S'inscrire</button>
-    <button *ngIf=" this.isAuth" nbButton outline status="danger" style="opacity : 0.9" class="right" (click)="onSignOut()">Deconnexion</button>
+  <div class="flex justify-center items-center">
+    <button (click)="goTo('/auth/signin')" *ngIf="!this.isAuth" class="right" nbButton outline status="success">Se connecter</button>
+    <button (click)="goTo('/auth/signup')" *ngIf=" !this.isAuth" class="right" nbButton outline status="success">S'inscrire</button>
+    <nb-icon (click)="onShowUserSettings()" *ngIf="this.isAuth" class="cursor-pointer" icon="person-outline" style="height: 50px; width: 50px"></nb-icon>
+    <button (click)="onSignOut()" *ngIf=" this.isAuth" class="right" nbButton outline status="danger" style="opacity : 0.9">Deconnexion</button>
   </div>
 </div>
 
-<button outline nbButton status="success" [nbContextMenu]="itemsAuth" *ngIf="mobile && isAuth" ngCloak>
+<button *ngIf="mobile && isAuth" [nbContextMenu]="itemsAuth" nbButton ngCloak outline status="success">
   Menu
 </button>
 
-<button outline nbButton status="success" [nbContextMenu]="itemsNotAuth" *ngIf="mobile && !isAuth" ngCloak>
+<button *ngIf="mobile && !isAuth" [nbContextMenu]="itemsNotAuth" nbButton ngCloak outline status="success">
   Menu
 </button>
+
+
+<app-modal-user [style]="isVisible()"></app-modal-user>
