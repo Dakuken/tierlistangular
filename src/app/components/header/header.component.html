@@ -23,4 +23,4 @@
 </button>
 
 
-<app-modal-user [style]="isVisible()"></app-modal-user>
+<app-modal-user [style]="isVisible()" *ngIf="isAuth"></app-modal-user>

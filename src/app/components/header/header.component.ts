@@ -3,6 +3,8 @@ import {Router} from '@angular/router';
 import {getAuth} from '@firebase/auth';
 import {NbMenuService} from '@nebular/theme';
 import {AuthService} from '../../services/auth/auth.service';
+import {Subscription} from "rxjs";
+import {UsersService} from "../../services/users.service";
 
 @Component({
   selector: 'app-header',
@@ -11,6 +13,10 @@ import {AuthService} from '../../services/auth/auth.service';
 })
 export class HeaderComponent implements OnInit {
   isAuth!: boolean
+
+  userSetting!: Subscription
+
+
   mobile: boolean = false
   itemsAuth: { title: string, click: () => void }[] = [
     {
@@ -48,7 +54,7 @@ export class HeaderComponent implements OnInit {
   ]
 
   showUserSetting = false
-  constructor(menu: NbMenuService, private router: Router, private authService: AuthService) {
+  constructor(menu: NbMenuService, private router: Router, private authService: AuthService, private userService : UsersService) {
     menu.onItemClick().subscribe((data) => {
       const item = data.item as any;
       item.click()
@@ -72,6 +78,14 @@ export class HeaderComponent implements OnInit {
         }
       }
     )
+
+
+    this.userSetting = this.userService.modifiedSubject.subscribe(
+        (exist: boolean) => {
+          this.showUserSetting = exist
+        }
+    );
+    this.userService.emitModifyChange()
   }
 
   onSignOut() {
@@ -92,7 +106,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onShowUserSettings(){
-    this.showUserSetting = !this.showUserSetting
+    this.userService.modifyChange()
   }
 
   isVisible() {

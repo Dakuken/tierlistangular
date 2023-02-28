@@ -2,12 +2,25 @@ import {Injectable} from '@angular/core';
 import {onValue, ref, set} from "firebase/database";
 import {FireStoreService} from "./fire-store.service";
 import {AuthService} from "./auth/auth.service";
+import {Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
 
+  isModified: boolean = false
+  modifiedSubject = new Subject<boolean>()
+
+  emitModifyChange() {
+    this.modifiedSubject.next(this.isModified)
+  }
+
+  modifyChange() {
+    this.isModified = !this.isModified
+    this.emitModifyChange()
+    console.log('laa', this.isModified);
+  }
 
   constructor(private fireStoreService: FireStoreService, private auth: AuthService) {
   }
@@ -27,7 +40,7 @@ export class UsersService {
   }
 
   async getEmailPseudo(): Promise<{ email: string, pseudo: string }> {
-    await this.sleep(1000)
+    await this.sleep(100)
     let id = this.auth.getUID()
     return new Promise((resolve, reject) => {
       onValue(ref(this.fireStoreService.db, `/users/${id}`), (user) => {
